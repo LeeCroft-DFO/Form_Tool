@@ -1,0 +1,64 @@
+{% macro render_label(question) %}
+	<label>
+		{% if question['mandatory'] == "yes" %}
+			*
+		{% endif %}
+		
+		{{ question['question_long'] }}
+	</label>
+	<br>
+{% endmacro %}
+
+{% macro render_question(question, saved_responses) %}
+	{{ render_label(question) }}
+	
+	{% if question['mandatory'] == "yes" %}
+		{% set required = "required" %}	
+	{% else %}
+		{% set required = "" %}
+	{% endif %}	
+
+	{% if question['format'] == "text" %}
+		<input type="text" id="{{ question['id'] }}" name="{{ question['question_short'] }}" value="{{ saved_responses[question['question_short']] }}" {{ required }}>
+		
+	{% elif question['format'] == "textarea" %}
+		<textarea type="text" id="{{ question['id'] }}" name="{{ question['question_short'] }}" rows="10" cols="30" {{ required }}>{{ saved_responses[question['question_short']] }}</textarea>
+		
+	{% elif (question['format'] == "select") or (question['format'] == "checkbox") %}
+		<select id="{{ question['id'] }}" name="{{ question['question_short'] }}" {{ required }}>
+			<option hidden disabled selected value> -- select an option -- </option>
+		
+			{% for response in question['responses'] %}
+				{% if saved_responses[question['question_short']] == response['response'] %}
+					{% set selected = "selected" %}	
+				{% else %}
+					{% set selected = "" %}
+				{% endif %}	
+				
+				<option value="{{ response['response'] }}" {{ selected }}>{{ response['response'] }}</option>
+			{% endfor %}
+		</select>
+		
+	{% elif question['format'] == "multiselect" %}
+		<select id="{{ question['id'] }}" name="{{ question['question_short'] }}" multiple {{ required }}>
+
+			{% for response in question['responses'] %}
+				{% if response['response'] in saved_responses[question['question_short']]  %}
+					{% set selected = "selected" %}	
+				{% else %}
+					{% set selected = "" %}
+				{% endif %}	
+				
+				<option value="{{ response['response'] }}" {{ selected }}>{{ response['response'] }}</option>
+			{% endfor %}
+		</select>
+		
+	{% else %}
+		<p>MISSING TEMPLATING DETAILS FOR QUESTION FORMAT</p>
+		
+	{% endif %}
+	
+	<br>
+	<br>
+		
+{% endmacro %}

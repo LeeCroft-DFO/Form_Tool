@@ -1,0 +1,32 @@
+{% from "question.html" import render_label %}
+{% from "question.html" import render_question %}
+
+{% if question_index > 0 %}
+	<form method="get" action="/costing">
+		<input type="hidden" name="action" value="prev">
+		<input type="submit" value="Previous page">
+	</form>
+{% endif %}
+
+<form method="post" action="/costing">
+	{% for question in questions %}
+		
+		{% if question["type"] == "object" %}
+			{{ render_label(question) }}
+			<br>
+			
+			{% for sub_question in question["sub_questions"] %}
+				{{ render_question(sub_question, saved_responses) }}
+			{% endfor %}
+			
+		{% else %}
+			{{ render_question(question, saved_responses) }}
+			
+		{% endif %}
+
+	{% endfor %}
+	
+	<br>
+	<br>
+	<input type="submit" value="Submit and go to next page">
+</form>
