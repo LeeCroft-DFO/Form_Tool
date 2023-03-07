@@ -1,0 +1,60 @@
+{% from "question.html" import render_label %}
+{% from "question.html" import render_response %}
+
+<!-- button to go back to the questionnaire page where the user left off (if the questionnaire was complete, this goes to the final page) -->
+<form method="get" action="/costing">
+	<input type="hidden" name="action" value="load">
+	<input type="submit" value="Back to active questionnaire">
+</form>
+
+<!-- button to begin a new questionnaire -->
+<form method="get" action="/costing">
+	<input type="hidden" name="action" value="new">
+	<input type="submit" value="Start a new questionnaire">
+</form>
+
+<h1>Questionnaire Report</h1>
+
+<!-- loop through each category of questions -->
+{% for question_category in questions.keys() %}
+	<!-- if the user has provided answers for the current category, render the recommendations -->
+	{% if question_category in responses %}
+		<!-- loop through each question in the category -->
+		{% for question in questions[question_category] %}
+				
+			<!-- if the question is an object, special rendering is needed -->
+			{% if question["type"] == "object" %}
+				{{ render_label(question) }}
+				<br>
+				
+				<!-- look up how many object instances exist in saved responses -->
+				{% set num_instances = responses[question_category][question["sub_questions"][0]["question_short"]]|length %}
+				
+				<!-- for each saved instance, render an object instance with the saved responses and recommendations -->
+				{% for obj_ind in range(num_instances) %}
+					{% for sub_question in question["sub_questions"] %}
+						{{ render_response(sub_question, [responses[question_category][sub_question["question_short"]][obj_ind]]) }}
+					{% endfor %}
+				{% endfor %}
+				
+			<!-- if dealing with a normal question, render it with its saved response and recommendations -->
+			{% else %}
+				{{ render_response(question, responses[question_category][question["question_short"]]) }}
+				
+			{% endif %}
+
+		{% endfor %}
+	{% endif %}
+{% endfor %}
+
+<!-- button to go back to the questionnaire page where the user left off (if the questionnaire was complete, this goes to the final page) -->
+<form method="get" action="/costing">
+	<input type="hidden" name="action" value="load">
+	<input type="submit" value="Back to active questionnaire">
+</form>
+
+<!-- button to begin a new questionnaire -->
+<form method="get" action="/costing">
+	<input type="hidden" name="action" value="new">
+	<input type="submit" value="Start a new questionnaire">
+</form>

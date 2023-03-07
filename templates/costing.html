@@ -1,6 +1,43 @@
+<!-- helper functions for rendering questions -->
 {% from "question.html" import render_label %}
 {% from "question.html" import render_question %}
 
+<link rel="stylesheet" href="static/styles.css" />
+<script src="static/form_controls.js"></script>
+
+<!-- macro to create an instance of an object -->
+{% macro render_object(question, ind) %}
+	<div id="{{ '%s_obj_%d' % (question['question_short'], (ind+1)) }}">
+		<fieldset name="obj_fieldset" class="object-fieldset">
+		
+			<!-- loop through and create each sub-question of the object -->
+			{% for sub_question in question["sub_questions"] %}
+			
+				<!-- look up a saved response, if one exists -->
+				{% if ind == -1 %}
+					{% set saved_response = {} %}
+				{% else %}
+					{% set saved_response = {sub_question['question_short']: [saved_responses[sub_question['question_short']][ind]]} %}
+				{% endif %}
+					
+				<!-- render the sub-question with its saved response -->
+				{{ render_question(sub_question, saved_response) }}
+			{% endfor %}
+		</fieldset>
+		
+		<!-- create a button to allow for dynamic deletion of the object instance -->
+		<input name="obj_btn_del" type="button" value="Delete Instance">
+	</div>
+{% endmacro %}
+
+<!-- display a progress tracker for the questionnaire pages -->
+<p>Page {{ (question_index+1) }} / {{ total_pages }}</p>
+<progress max="{{ total_pages }}" value="{{ question_index }}">{{ question_index }}/{{ total_pages }}</progress>
+<br>
+<br>
+<br>
+
+<!-- if not on the first page of the questionnaire, create a button to go back to the previous page -->
 {% if question_index > 0 %}
 	<form method="get" action="/costing">
 		<input type="hidden" name="action" value="prev">
@@ -8,25 +45,59 @@
 	</form>
 {% endif %}
 
+<!-- main form containing the question fields -->
 <form method="post" action="/costing">
+
+	<!-- loop through and create each question -->
 	{% for question in questions %}
 		
+		<!-- if the question is an object, special rendering is needed -->
 		{% if question["type"] == "object" %}
 			{{ render_label(question) }}
+			
+			<!-- hidden tag used to track id prefixes associated with each group of object instances for use by javascript to control dynamic object instance manipulation -->
+			<p id="{{ question['question_short'] }}" name="hidden_id" class="invisible">
 			<br>
 			
-			{% for sub_question in question["sub_questions"] %}
-				{{ render_question(sub_question, saved_responses) }}
-			{% endfor %}
+			<div>
+				<!-- create a first object instance to be used as an invisible cloning template for addition of new instances -->
+				{{ render_object(question, -1) }}
+				
+				<!-- look up how many object instances exist in saved responses -->
+				{% set num_responses = saved_responses[question['sub_questions'][0]['question_short']]|length %}
+				
+				<!-- for each saved instance, render an object instance with the saved responses -->
+				{% for ind in range(num_responses) %}
+					{{ render_object(question, ind) }}
+				{% endfor %}
+			</div>
+			<input type="button" id="{{ '%s_btn_add' % question['question_short'] }}" value="Add Instance">
+			<br>
+			<br>
 			
+		<!-- if dealing with a normal question, render it with its saved response -->
 		{% else %}
 			{{ render_question(question, saved_responses) }}
 			
 		{% endif %}
 
+		<br>
+
 	{% endfor %}
 	
 	<br>
 	<br>
-	<input type="submit" value="Submit and go to next page">
+	<br>
+	<br>
+	<!-- submit form button, customized depending on whether the user is on the last page of the questionnaire or not -->
+	{% if question_index < (total_pages-1) %}
+		<input type="submit" value="Submit and go to next page">
+	{% else %}
+		<input type="submit" value="Submit and view report">
+	{% endif %}
+</form>
+
+<!-- button to view a report for all responses given so far -->
+<form method="get" action="/report">
+	<input type="submit" value="View partial report">
 </form>

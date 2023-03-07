@@ -1,5 +1,7 @@
+<!-- macro to render question labels -->
 {% macro render_label(question) %}
 	<label>
+		<!-- if the question is mandatory, display an asterisk -->
 		{% if question['mandatory'] == "yes" %}
 			*
 		{% endif %}
@@ -9,56 +11,117 @@
 	<br>
 {% endmacro %}
 
+<!-- macro to render question form fields -->
 {% macro render_question(question, saved_responses) %}
 	{{ render_label(question) }}
 	
+	<!-- use a variable to validate form fields as being required if the question is mandatory -->
 	{% if question['mandatory'] == "yes" %}
 		{% set required = "required" %}	
 	{% else %}
 		{% set required = "" %}
 	{% endif %}	
+	
+	<!-- look up whether the question has a saved response -->
+	{% if question['question_short'] in saved_responses %}
+		{% set saved_response = saved_responses[question['question_short']] %}	
+	{% else %}
+		{% set saved_response = [''] %}
+	{% endif %}	
 
+	<!-- for standard text-based fields, configure the field based on the input type for validation (currently supporting integer, float and string) -->
 	{% if question['format'] == "text" %}
-		<input type="text" id="{{ question['id'] }}" name="{{ question['question_short'] }}" value="{{ saved_responses[question['question_short']] }}" {{ required }}>
-		
+		{% if question['type'] == "integer" %}
+			<input type="number" name="{{ question['question_short'] }}" value="{{ saved_response[0] }}" {{ required }}>
+		{% elif question['type'] == "float" %}
+			<input type="number" step="any" name="{{ question['question_short'] }}" value="{{ saved_response[0] }}" {{ required }}>
+		{% else %}
+			<input type="text" name="{{ question['question_short'] }}" value="{{ saved_response[0] }}" {{ required }}>
+		{% endif %}
+	
+	<!-- long-form fields use a textarea -->	
 	{% elif question['format'] == "textarea" %}
-		<textarea type="text" id="{{ question['id'] }}" name="{{ question['question_short'] }}" rows="10" cols="30" {{ required }}>{{ saved_responses[question['question_short']] }}</textarea>
-		
+		<textarea type="text" name="{{ question['question_short'] }}" rows="10" cols="30" {{ required }}>{{ saved_response[0] }}</textarea>
+	
+	<!-- selection type questions and boolean (checkboxes) both use the select field -->
 	{% elif (question['format'] == "select") or (question['format'] == "checkbox") %}
-		<select id="{{ question['id'] }}" name="{{ question['question_short'] }}" {{ required }}>
+		<select name="{{ question['question_short'] }}" {{ required }}>
+		
+			<!-- create a disabled option that prompts the user to select from the list -->
 			<option hidden disabled selected value> -- select an option -- </option>
 		
+			<!-- populate the list from the response options -->
 			{% for response in question['responses'] %}
-				{% if saved_responses[question['question_short']] == response['response'] %}
-					{% set selected = "selected" %}	
+			
+				<!-- if one of the options was previously selected and saved, restore it as the currently selected option -->
+				{% if saved_response[0] == response['response'] %}
+					<option value="{{ response['response'] }}" selected>{{ response['response'] }}</option>	
 				{% else %}
-					{% set selected = "" %}
+					<option value="{{ response['response'] }}">{{ response['response'] }}</option>	
 				{% endif %}	
-				
-				<option value="{{ response['response'] }}" {{ selected }}>{{ response['response'] }}</option>
 			{% endfor %}
 		</select>
 		
+	<!-- multiselect type questions use a special configuration of the select field -->
 	{% elif question['format'] == "multiselect" %}
-		<select id="{{ question['id'] }}" name="{{ question['question_short'] }}" multiple {{ required }}>
+		<select name="{{ question['question_short'] }}" multiple {{ required }}>
 
+			<!-- populate the list from the response options -->
 			{% for response in question['responses'] %}
-				{% if response['response'] in saved_responses[question['question_short']]  %}
-					{% set selected = "selected" %}	
+			
+				<!-- if one of the options was previously selected and saved, restore it as one of the currently selected options -->
+				{% if response['response'] in saved_response %}
+					<option value="{{ response['response'] }}" selected>{{ response['response'] }}</option>
 				{% else %}
-					{% set selected = "" %}
+					<option value="{{ response['response'] }}">{{ response['response'] }}</option>
 				{% endif %}	
-				
-				<option value="{{ response['response'] }}" {{ selected }}>{{ response['response'] }}</option>
 			{% endfor %}
 		</select>
 		
+	<!-- display a message warning if an unknown question type was encountered -->
 	{% else %}
 		<p>MISSING TEMPLATING DETAILS FOR QUESTION FORMAT</p>
 		
 	{% endif %}
 	
+	<!-- create a help icon with a tooltip to display more information about the response required for the question -->
+	<label class="question-help" title="{{ question['help'] }}">?</label>
+	
 	<br>
 	<br>
 		
+{% endmacro %}
+
+<!-- macro to render question, response and recommendation groups in the report -->
+{% macro render_response(question, responses) %}
+
+	<!-- use a namespace to track whether a recommendation exists for the response given -->
+	{% set ns = namespace(recommendations=False) %}	
+	{{ render_label(question) }}
+	
+	<!-- display all responses (there may be more than one) for the current question -->
+	<p>Response: {{ ", ".join(responses) }}</p>
+	<p>Recommendations: </p>
+	<ul>
+		<!-- check each response option for the question to see if it is among the responses provided by the user -->
+		{% for response_opt in question['responses'] %}
+			{% if (response_opt['response'] in responses) and (not(response_opt['response'] == '')) %}
+			
+				<!-- track that a recommendation has been found -->
+				{% set ns.recommendations = True %}
+				
+				<!-- display a list of all recommendations for the current response -->
+				{% for recommendation in response_opt['recommendations'] %}
+					<li>{{ recommendation['recommendation'] }}</li>
+				{% endfor %}
+			{% endif %}
+		{% endfor %}
+	</ul>
+	
+	<!-- if no recommendations were found, display N/A -->
+	{% if not(ns.recommendations) %}
+		<p>N/A</p>
+	{% endif %}
+	<br>
+	<br>
 {% endmacro %}

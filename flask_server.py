@@ -1,26 +1,37 @@
 from flask import Flask, request, render_template, redirect, url_for
 import json
 import os
+import copy
    
+#ordered list of the question categories
+question_keys = []
+
+#object to track the responses  
+responses = {'question_index': 0}
+
 
 #load the questionnaire json data
 with open('data/CostingFramework_Min.json', 'rb') as json_file:
     questions = json.load(json_file)
     
-#build an ordered list of the question categories
-question_keys = []
+
+#iterate over all question categories
 for key in questions.keys():
     if ('lu_questions' in key):
+    
+        #store the key to enforce an order for the categories
         question_keys.append(key)
         
-        #for any questions with objects as answer types, add the object structure to the question
+        #check if each question has an object as an answer type, add the object structure to the question if so
         for question in questions[key]:
             if (question['type'] == 'object'):
-                question['sub_questions'] = questions[question['format']]
-        
-#create an object to track the responses  
-responses = {'question_index': 0}
-    
+                question['sub_questions'] = copy.deepcopy(questions[question['format']])
+                
+                #create a unique name for each subquestion
+                for sub_question in question['sub_questions']:
+                    sub_question['question_short'] = '%s_%s' % (question['question_short'], sub_question['question_short'])
+                
+
   
 #create the web app
 app = Flask(__name__)
@@ -45,20 +56,21 @@ def costing():
         question_key = question_keys[responses['question_index']]
     
         #update the response data in memory
-        responses['question_index'] += 1
         responses[question_key] = request.form.to_dict(flat=False)
         
-        #remove the imposed list structure from non-multivalue responses
-        for response_key in responses[question_key].keys():
-            if (len(responses[question_key][response_key]) == 1):
-                responses[question_key][response_key] = responses[question_key][response_key][0]
+        #increase the question index unless the final page has just been completed
+        if (responses['question_index'] < len(question_keys)):
+            responses['question_index'] += 1
         
         #save the updated responses to disk
         with open('data/responses.json', 'w') as json_file:
             json.dump(responses, json_file)
         
-        #redirect to the next page of questions
-        return redirect(url_for('costing', action='next'))
+        #redirect to the report if the final page has been completed, otherwise redirect to the next page of questions
+        if (responses['question_index'] == len(question_keys)):
+            return redirect(url_for('report'))
+        else:
+            return redirect(url_for('costing', action='next'))
     
     #if a question category form was requested
     else:
@@ -68,10 +80,21 @@ def costing():
             
         #if the user loads existing response data
         elif (request.args.get('action') == 'load'):
-            if (os.path.exists('data/responses.json')):
+        
+            #if a load was requested when a fully complete questionnaire is present in memory, step back to the last question
+            if (responses['question_index'] == len(question_keys)):
+                responses['question_index'] -= 1
+        
+            #if data is present, load it
+            elif (os.path.exists('data/responses.json')):
                 with open('data/responses.json', 'rb') as json_file:
                     responses = json.load(json_file)
-            #treat this as starting a new questionnaire if saved data does not exist
+                    
+                #if a fully completed questionnaire was loaded, display the report
+                if (responses['question_index'] == len(question_keys)):
+                    return redirect(url_for('report'))
+                    
+            #otherwise, treat this as starting a new questionnaire if saved data does not exist
             else:
                 responses = {'question_index': 0}
                 
@@ -89,7 +112,13 @@ def costing():
             saved_responses = {}
                 
         #render the template for the current question category
-        return render_template('costing.html', question_index=responses['question_index'], questions=questions[question_key], saved_responses=saved_responses)
+        return render_template('costing.html', question_index=responses['question_index'], total_pages=len(question_keys), questions=questions[question_key], saved_responses=saved_responses)
+        
+        
+#report of questions, responses and recommendations
+@app.route("/report")
+def report():
+    return render_template('report.html', questions=questions, responses=responses)
     
     
     
