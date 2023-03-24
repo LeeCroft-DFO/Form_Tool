@@ -1,6 +1,76 @@
 {% from "question.html" import render_label %}
 {% from "question.html" import render_response %}
 
+<link rel="stylesheet" href="static/styles.css" />
+
+<!-- macro to render the data for a section of responses (which may contain an arbitrary nesting of subsections) -->
+{% macro render_section(section_questions, section_responses) %}
+
+	<!-- loop through and render each question (which may either be an internal node or leaf node in the tree structure) in the section -->
+	{% for question in section_questions %}
+	
+		<!-- if the question represents a subsection -->
+		{% if 'lu_questions' in question['format'] %}
+			{{ render_label(question) }}
+			<br>
+			
+			<!-- for each instance created for the subsection -->
+			{% for ins in section_responses[question['format']] %}
+				{{ '%s~%s' % (question['format'], ins) }}
+				<br>
+				
+				<!-- if response data has been provided for th instance, recursively render it -->
+				{% if ('%s~%s' % (question['format'], ins) in responses) %}
+					{{ render_section(questions[question['format']], responses['%s~%s' % (question['format'], ins)]) }}
+				{% else %}
+					Incomplete instance
+					<br>
+				{% endif %}
+			{% endfor %}
+			<br>
+			<br>
+			
+		<!-- otherwise, treat the question as a node within the tree structure to be parsed -->
+		{% else %}
+			{{ render_tree_node(question, section_responses[question['question_short']]) }}
+		{% endif %}
+	{% endfor %}
+
+{% endmacro %}
+
+<!-- macro to render a node in the tree structure of questions (node type is not yet specified) -->
+{% macro render_tree_node(question, responses) %}
+
+	<!-- if the question is an object, special rendering is needed -->
+	{% if question['type'] == 'object' %}
+		{{ render_object_collection(question, responses) }}
+		
+	<!-- if dealing with a normal question, render it with its saved response and recommendations -->
+	{% else %}
+		{{ render_response(question, responses) }}	
+	{% endif %}
+	
+{% endmacro %}
+
+
+<!-- macro to create a collection of object instances (an internal node of the tree structure) -->
+{% macro render_object_collection(object_question, object_responses) %}
+
+	{{ render_label(object_question) }}
+	<br>
+	
+	<!-- for each saved instance, render an object instance with the saved responses and recommendations -->
+	{% for obj_ind in range(object_responses|length) %}
+		{% for sub_question in object_question['sub_questions'] %}
+			{{ render_tree_node(sub_question, object_responses[obj_ind][sub_question['question_short']]) }}
+		{% endfor %}
+	{% endfor %}
+
+{% endmacro %}
+
+
+
+
 <!-- button to go back to the questionnaire page where the user left off (if the questionnaire was complete, this goes to the final page) -->
 <form method="get" action="/costing">
 	<input type="hidden" name="action" value="load">
@@ -15,37 +85,11 @@
 
 <h1>Questionnaire Report</h1>
 
-<!-- loop through each category of questions -->
-{% for question_category in questions.keys() %}
-	<!-- if the user has provided answers for the current category, render the recommendations -->
-	{% if question_category in responses %}
-		<!-- loop through each question in the category -->
-		{% for question in questions[question_category] %}
-				
-			<!-- if the question is an object, special rendering is needed -->
-			{% if question["type"] == "object" %}
-				{{ render_label(question) }}
-				<br>
-				
-				<!-- look up how many object instances exist in saved responses -->
-				{% set num_instances = responses[question_category][question["sub_questions"][0]["question_short"]]|length %}
-				
-				<!-- for each saved instance, render an object instance with the saved responses and recommendations -->
-				{% for obj_ind in range(num_instances) %}
-					{% for sub_question in question["sub_questions"] %}
-						{{ render_response(sub_question, [responses[question_category][sub_question["question_short"]][obj_ind]]) }}
-					{% endfor %}
-				{% endfor %}
-				
-			<!-- if dealing with a normal question, render it with its saved response and recommendations -->
-			{% else %}
-				{{ render_response(question, responses[question_category][question["question_short"]]) }}
-				
-			{% endif %}
+<!-- if the user has submitted at least the top-level worth of responses, begin a recursive parsing of the response data to build out a report -->
+{% if (top_level_section in responses) %}
+	{{ render_section(questions[top_level_section], responses[top_level_section]) }}
+{% endif %}
 
-		{% endfor %}
-	{% endif %}
-{% endfor %}
 
 <!-- button to go back to the questionnaire page where the user left off (if the questionnaire was complete, this goes to the final page) -->
 <form method="get" action="/costing">

@@ -8,12 +8,16 @@
 		
 		{{ question['question_long'] }}
 	</label>
+	
+	<!-- create a help icon with a tooltip to display more information about the response required for the question -->
+	<label class="question-help" title="{{ question['help'] }}">?</label>
 	<br>
 {% endmacro %}
 
 <!-- macro to render question form fields -->
-{% macro render_question(question, saved_responses) %}
-	{{ render_label(question) }}
+{% macro render_question(question, saved_responses, id_prefix) %}
+	
+	{% set name = '%s~%s' % (id_prefix, question['question_short']) %}
 	
 	<!-- use a variable to validate form fields as being required if the question is mandatory -->
 	{% if question['mandatory'] == "yes" %}
@@ -22,30 +26,28 @@
 		{% set required = "" %}
 	{% endif %}	
 	
-	<!-- look up whether the question has a saved response -->
-	{% if question['question_short'] in saved_responses %}
-		{% set saved_response = saved_responses[question['question_short']] %}	
-	{% else %}
-		{% set saved_response = [''] %}
+	<!-- use an empty placeholder if no responses were saved -->
+	{% if saved_responses is undefined %}
+		{% set saved_responses = [''] %}
 	{% endif %}	
 
 	<!-- for standard text-based fields, configure the field based on the input type for validation (currently supporting integer, float and string) -->
 	{% if question['format'] == "text" %}
 		{% if question['type'] == "integer" %}
-			<input type="number" name="{{ question['question_short'] }}" value="{{ saved_response[0] }}" {{ required }}>
+			<input type="number" name="{{ name }}" value="{{ saved_responses[0] }}" {{ required }}>
 		{% elif question['type'] == "float" %}
-			<input type="number" step="any" name="{{ question['question_short'] }}" value="{{ saved_response[0] }}" {{ required }}>
+			<input type="number" step="any" name="{{ name }}" value="{{ saved_responses[0] }}" {{ required }}>
 		{% else %}
-			<input type="text" name="{{ question['question_short'] }}" value="{{ saved_response[0] }}" {{ required }}>
+			<input type="text" name="{{ name }}" value="{{ saved_responses[0] }}" {{ required }}>
 		{% endif %}
 	
 	<!-- long-form fields use a textarea -->	
 	{% elif question['format'] == "textarea" %}
-		<textarea type="text" name="{{ question['question_short'] }}" rows="10" cols="30" {{ required }}>{{ saved_response[0] }}</textarea>
+		<textarea type="text" name="{{ name }}" rows="10" cols="30" {{ required }}>{{ saved_responses[0] }}</textarea>
 	
 	<!-- selection type questions and boolean (checkboxes) both use the select field -->
 	{% elif (question['format'] == "select") or (question['format'] == "checkbox") %}
-		<select name="{{ question['question_short'] }}" {{ required }}>
+		<select name="{{ name }}" {{ required }}>
 		
 			<!-- create a disabled option that prompts the user to select from the list -->
 			<option hidden disabled selected value> -- select an option -- </option>
@@ -54,7 +56,7 @@
 			{% for response in question['responses'] %}
 			
 				<!-- if one of the options was previously selected and saved, restore it as the currently selected option -->
-				{% if saved_response[0] == response['response'] %}
+				{% if saved_responses[0] == response['response'] %}
 					<option value="{{ response['response'] }}" selected>{{ response['response'] }}</option>	
 				{% else %}
 					<option value="{{ response['response'] }}">{{ response['response'] }}</option>	
@@ -64,13 +66,13 @@
 		
 	<!-- multiselect type questions use a special configuration of the select field -->
 	{% elif question['format'] == "multiselect" %}
-		<select name="{{ question['question_short'] }}" multiple {{ required }}>
+		<select name="{{ name }}" multiple {{ required }}>
 
 			<!-- populate the list from the response options -->
 			{% for response in question['responses'] %}
 			
 				<!-- if one of the options was previously selected and saved, restore it as one of the currently selected options -->
-				{% if response['response'] in saved_response %}
+				{% if response['response'] in saved_responses %}
 					<option value="{{ response['response'] }}" selected>{{ response['response'] }}</option>
 				{% else %}
 					<option value="{{ response['response'] }}">{{ response['response'] }}</option>
@@ -84,9 +86,6 @@
 		
 	{% endif %}
 	
-	<!-- create a help icon with a tooltip to display more information about the response required for the question -->
-	<label class="question-help" title="{{ question['help'] }}">?</label>
-	
 	<br>
 	<br>
 		
@@ -99,24 +98,24 @@
 	{% set ns = namespace(recommendations=False) %}	
 	{{ render_label(question) }}
 	
-	<!-- display all responses (there may be more than one) for the current question -->
-	<p>Response: {{ ", ".join(responses) }}</p>
-	<p>Recommendations: </p>
-	<ul>
-		<!-- check each response option for the question to see if it is among the responses provided by the user -->
-		{% for response_opt in question['responses'] %}
-			{% if (response_opt['response'] in responses) and (not(response_opt['response'] == '')) %}
-			
-				<!-- track that a recommendation has been found -->
-				{% set ns.recommendations = True %}
-				
-				<!-- display a list of all recommendations for the current response -->
-				{% for recommendation in response_opt['recommendations'] %}
-					<li>{{ recommendation['recommendation'] }}</li>
-				{% endfor %}
-			{% endif %}
-		{% endfor %}
-	</ul>
+	{% for response in responses %}
+		<p>Response: {{ response }}</p>
+		<p>Recommendations: </p>
+		
+		<ul>
+			{% for response_opt in question['responses'] %}
+				{% if (response_opt['response'] == response) and (not(response_opt['response'] == '')) %}
+					<!-- track that a recommendation has been found -->
+					{% set ns.recommendations = True %}
+					
+					<!-- display a list of all recommendations for the current response -->
+					{% for recommendation in response_opt['recommendations'] %}
+						<li>{{ recommendation['recommendation'] }}</li>
+					{% endfor %}
+				{% endif %}
+			{% endfor %}
+		</ul>
+	{% endfor %}
 	
 	<!-- if no recommendations were found, display N/A -->
 	{% if not(ns.recommendations) %}

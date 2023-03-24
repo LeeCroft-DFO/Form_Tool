@@ -5,99 +5,143 @@
 <link rel="stylesheet" href="static/styles.css" />
 <script src="static/form_controls.js"></script>
 
-<!-- macro to create an instance of an object -->
-{% macro render_object(question, ind) %}
-	<div id="{{ '%s_obj_%d' % (question['question_short'], (ind+1)) }}">
+
+<!-- macro to render a node in the tree structure of questions (node type is not yet specified) -->
+{% macro render_tree_node(question, responses, id_prefix) %}
+
+	<!-- display the label for the object -->
+	{{ render_label(question) }}
+	
+	<!-- if the question is a section, the node should be rendered as an internal node (a collection of section instances) -->
+	{% if 'lu_questions' in question['format'] %}
+		{{render_section(question, responses[question['format']]) }}
+		
+	<!-- if the question is an object, the node should be rendered as an internal node (a collection of objects) -->
+	{% elif question['type'] == 'object' %}
+		{{ render_object_collection(question, responses[question['question_short']], id_prefix) }}
+		
+	<!-- if the question is not an object, the node should be rendered as a child node (flat question) -->
+	{% else %}
+		{{ render_question(question, responses[question['question_short']], id_prefix) }}
+	{% endif %}
+	
+	<br>
+{% endmacro %}
+
+
+<!-- macro to create a collection of object instances (an internal node of the tree structure) -->
+{% macro render_object_collection(object_question, object_responses, id_prefix) %}
+
+	<!-- create a unique id prefix for the object -->
+	{% set id = '%s~%s' % (id_prefix, object_question['question_short']) %}
+			
+	<!-- hidden tag used to track id prefixes associated with each group of object instances for use by javascript to control dynamic object instance manipulation -->
+	<p id="{{ id }}" name="hidden_id" class="invisible">
+	<br>
+	
+	<div>
+		<!-- create a first object instance to be used as an invisible cloning template for addition of new instances -->
+		{{ render_object_instance(object_question, -1, {}, id) }}
+		
+		<!-- look up how many object instances exist in saved responses -->
+		{% if object_responses is undefined %}
+			{% set num_responses = 0 %}
+		{% else %}
+			{% set num_responses = object_responses|length %}
+		{% endif %}
+		
+		<!-- for each saved instance, render an object instance with the saved responses -->
+		{% for ind in range(num_responses) %}
+			{{ render_object_instance(object_question, ind, object_responses[ind], id) }}
+		{% endfor %}
+	</div>
+
+	<input type="button" id="{{ '%s_btn_add' % id }}" value="Add Instance">
+	<br>
+	<br>
+{% endmacro %}
+
+
+<!-- macro to create an instance of an object (a component of an internal node of the tree structure) -->
+{% macro render_object_instance(object_question, ind, instance_responses, id_prefix) %}
+
+	<!-- create a unique id prefix for the object instance -->
+	{% set id = '%s~obj_%d' % (id_prefix, (ind+1)) %}
+	
+	<div id="{{ id }}">
 		<fieldset name="obj_fieldset" class="object-fieldset">
 		
-			<!-- loop through and create each sub-question of the object -->
-			{% for sub_question in question["sub_questions"] %}
-			
-				<!-- look up a saved response, if one exists -->
-				{% if ind == -1 %}
-					{% set saved_response = {} %}
-				{% else %}
-					{% set saved_response = {sub_question['question_short']: [saved_responses[sub_question['question_short']][ind]]} %}
-				{% endif %}
-					
-				<!-- render the sub-question with its saved response -->
-				{{ render_question(sub_question, saved_response) }}
+			<!-- loop through and create each sub-question (which may itself be either another internal node or a child node of the question tree structure) of the object instance -->
+			{% for sub_question in object_question["sub_questions"] %}
+				{{ render_tree_node(sub_question, instance_responses, id) }}
 			{% endfor %}
 		</fieldset>
 		
 		<!-- create a button to allow for dynamic deletion of the object instance -->
-		<input name="obj_btn_del" type="button" value="Delete Instance">
+		<input type="button" name="obj_btn_del" value="Delete Instance">
 	</div>
 {% endmacro %}
 
-<!-- display a progress tracker for the questionnaire pages -->
-<p>Page {{ (question_index+1) }} / {{ total_pages }}</p>
-<progress max="{{ total_pages }}" value="{{ question_index }}">{{ question_index }}/{{ total_pages }}</progress>
-<br>
-<br>
-<br>
 
-<!-- if not on the first page of the questionnaire, create a button to go back to the previous page -->
-{% if question_index > 0 %}
-	<form method="get" action="/costing">
-		<input type="hidden" name="action" value="prev">
-		<input type="submit" value="Previous page">
-	</form>
-{% endif %}
+<!-- macro to render a question that generates sub-sections -->
+{% macro render_section(question, responses) %}
+
+	<fieldset name="sec_fieldset" class="object-fieldset">
+		<!-- hidden tag used to track the name associated with each group of section instances for use by javascript to control dynamic section instance manipulation -->
+		<p id="{{ question['format'] }}" name="section_id" class="invisible">
+			
+		<!-- one instance of the sub-section will always be created by default -->
+		<div id="{{ question['format'] }}~0">
+			<input type="hidden" name="~{{ question['format'] }}" value="0">
+			<input type="submit" name="sec_btn_edit" value="Edit Instance">
+		</div>
+		
+		<!-- if other instances exist in the saved responses, display them as well -->
+		{% for instance_num in responses %}
+			{% if (not(instance_num == '0')) %}
+				<div id="{{ question['format'] }}~{{ instance_num }}">
+					<input type="hidden" name="~{{ question['format'] }}" value="{{ instance_num }}">
+					<input type="submit" name="sec_btn_edit" value="Edit Instance">
+					<input type="button" name="sec_btn_del" value="Delete Instance">
+				</div>
+			{% endif %}
+		{% endfor %}
+	</fieldset>
+	
+	<br>
+	<input type="button" id="{{ '%s_btn_add' % question['format'] }}" value="Add Instance">
+	<br>
+	<br>
+
+{% endmacro %}
+
+
+<!-- button to view a table of contents for the questionnaire sections available so far -->
+<form method="get" action="/toc">
+	<input type="submit" value="View table of contents">
+</form>
 
 <!-- main form containing the question fields -->
 <form method="post" action="/costing">
 
-	<!-- loop through and create each question -->
-	{% for question in questions %}
-		
-		<!-- if the question is an object, special rendering is needed -->
-		{% if question["type"] == "object" %}
-			{{ render_label(question) }}
-			
-			<!-- hidden tag used to track id prefixes associated with each group of object instances for use by javascript to control dynamic object instance manipulation -->
-			<p id="{{ question['question_short'] }}" name="hidden_id" class="invisible">
-			<br>
-			
-			<div>
-				<!-- create a first object instance to be used as an invisible cloning template for addition of new instances -->
-				{{ render_object(question, -1) }}
-				
-				<!-- look up how many object instances exist in saved responses -->
-				{% set num_responses = saved_responses[question['sub_questions'][0]['question_short']]|length %}
-				
-				<!-- for each saved instance, render an object instance with the saved responses -->
-				{% for ind in range(num_responses) %}
-					{{ render_object(question, ind) }}
-				{% endfor %}
-			</div>
-			<input type="button" id="{{ '%s_btn_add' % question['question_short'] }}" value="Add Instance">
-			<br>
-			<br>
-			
-		<!-- if dealing with a normal question, render it with its saved response -->
-		{% else %}
-			{{ render_question(question, saved_responses) }}
-			
-		{% endif %}
+	<input type="hidden" name="question_index" value="{{ question_index }}">
+	<input type="hidden" id="hidden_edit_index" name="edit_index"  value="{{ question_index }}">
 
-		<br>
-
+	<!-- loop through and create each question (these may either be internal nodes or child nodes of the question tree structure) -->
+	{% for question in questions %}		
+		{{ render_tree_node(question, saved_responses, '') }}
 	{% endfor %}
 	
 	<br>
 	<br>
 	<br>
 	<br>
-	<!-- submit form button, customized depending on whether the user is on the last page of the questionnaire or not -->
-	{% if question_index < (total_pages-1) %}
-		<input type="submit" value="Submit and go to next page">
-	{% else %}
-		<input type="submit" value="Submit and view report">
-	{% endif %}
+	
+	<input type="submit" value="Submit and return to table of contents">
 </form>
 
 <!-- button to view a report for all responses given so far -->
 <form method="get" action="/report">
 	<input type="submit" value="View partial report">
 </form>
+

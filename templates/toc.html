@@ -1,0 +1,61 @@
+<link rel="stylesheet" href="static/styles.css" />
+
+<!-- recursive function used to build out the nested parts of the table of contents -->
+{% macro build_toc(toc_obj) %}
+	<ul>
+		<!-- for each section at the current level, build a list item -->
+		{% for key in toc_obj %}
+			<li>
+				{{ key }}
+				<ul>
+					<!-- for each instance of the current section, build a sub-list item -->
+					{% for ins_key in toc_obj[key] %}
+						<li>
+							<!-- colour the link for the section instance red if it has not yet been completed by the user -->
+							{% if (toc_obj[key][ins_key]['complete']) %}
+								<a href="/costing?action=goto&question_index={{ ins_key }}">{{ ins_key }}</a>
+							{% else %}
+								<a href="/costing?action=goto&question_index={{ ins_key }}" class="incomplete">{{ ins_key }}</a>
+							{% endif %}
+							
+							<!-- if the section instance has children, recusively parse them as well -->
+							{% if not(toc_obj[key][ins_key]['children'] == {}) %}
+								{{ build_toc(toc_obj[key][ins_key]['children']) }}
+							{% endif %}
+						</li>
+					{% endfor %}
+				</ul>
+			</li>
+		{% endfor %}
+	</ul>
+{% endmacro %}
+
+
+<h1>Questionnaire Navigation</h1>
+<br>
+<p>Select a link below to navigate to any previously visitied questionnaire section. Links shown in red indicate subsections that have not yet been completed.</p>
+
+{% if (num_incomplete == 0) %}
+	<p>All generated subsections are complete. You may view the full report or add further instances of subsections if needed.</p>
+{% elif (num_incomplete == 1) %}
+	<p>There is currently 1 incomplete subsection.</p>
+{% else %}
+	<p>There are currently {{ num_incomplete }} incomplete subsections.</p>
+{% endif %}
+
+<br>
+<br>
+
+
+<!-- nested list structure used to display the tree structure of the nested sections with links to navigate to them -->
+<ul>
+	<li>
+		<!-- one item for the top level, followed by a recursive population of the nested data -->
+		{% if (toc == {}) %}
+			<a href="/costing?action=goto&question_index={{ top_level_name }}" class="incomplete">{{ top_level_name }}</a>
+		{% else %}
+			<a href="/costing?action=goto&question_index={{ top_level_name }}">{{ top_level_name }}</a>
+			{{ build_toc(toc) }}
+		{% endif %}
+	</li>	
+<ul>

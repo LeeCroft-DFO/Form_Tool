@@ -11,3 +11,7 @@
 .invisible{
 	display: none;
 }
+
+.incomplete{
+	color: red;
+}
