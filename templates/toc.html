@@ -13,9 +13,9 @@
 						<li>
 							<!-- colour the link for the section instance red if it has not yet been completed by the user -->
 							{% if (toc_obj[key][ins_key]['complete']) %}
-								<a href="/costing?action=goto&question_index={{ ins_key }}">{{ ins_key }}</a>
+								<a href="/costing?action=goto&question_index={{ ins_key }}">{{ toc_obj[key][ins_key]['name'] }}</a>
 							{% else %}
-								<a href="/costing?action=goto&question_index={{ ins_key }}" class="incomplete">{{ ins_key }}</a>
+								<a href="/costing?action=goto&question_index={{ ins_key }}" class="incomplete">{{ toc_obj[key][ins_key]['name'] }}</a>
 							{% endif %}
 							
 							<!-- if the section instance has children, recusively parse them as well -->

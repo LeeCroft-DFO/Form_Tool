@@ -84,9 +84,10 @@ def parse_responses(res_dict):
                             remaining_key = other_res_key[next_tilde_ind:]
                             instance_dict[instance_num][remaining_key] = res_dict[other_res_key]
                 
-                #create a list to store the parsed instances and populate it by recursively calling parse res on the flat instance_dict entries
+                #create a list to store the parsed instances and populate it by recursively calling parse_responses on the flat instance_dict entries
                 instance_list = []
-                for instance_num in range(1, len(instance_dict.keys())+1):
+
+                for instance_num in instance_dict.keys():
                     instance_list.append(parse_responses(instance_dict[str(instance_num)]))
                     
                 #add the strucutre version of the of the instances to parsed_dict
@@ -103,14 +104,15 @@ def extract_toc(response_obj):
     
     #for each key pertaining to a section at the current level of responses
     for key in response_obj.keys():
-        if ('lu_questions' in key):
+        if (('lu_questions' in key) and not('_subsection_instance_name' in key)):
         
             sub_toc = {}
             
             #for each instance of the section that has been created
-            for ind in response_obj[key]:
+            for ind in range(len(response_obj[key])):
+            #for ind in response_obj[key]:
             
-                sub_key = '%s~%s' % (key, ind)
+                sub_key = '%s~%s' % (key, response_obj[key][ind])
             
                 #if the instance has its own response data, recursively parse it
                 if (sub_key in responses):
@@ -122,6 +124,8 @@ def extract_toc(response_obj):
                 else:
                     sub_toc[sub_key] = {'complete': False, 'children': {}}
                     num_incomplete += 1
+                    
+                sub_toc[sub_key]['name'] = response_obj['%s_subsection_instance_name' % key][ind]
               
             #store all the instances for the section
             toc[key] = sub_toc

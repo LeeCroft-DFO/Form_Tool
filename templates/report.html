@@ -15,15 +15,18 @@
 			<br>
 			
 			<!-- for each instance created for the subsection -->
-			{% for ins in section_responses[question['format']] %}
-				{{ '%s~%s' % (question['format'], ins) }}
+			{% for ind in range(section_responses[question['format']]|length) %}
+			
+				{% set subsection_id = '%s~%s' % (question['format'], section_responses[question['format']][ind]) %}
+
+				<p>{{ section_responses['%s_subsection_instance_name' % question['format']][ind] }}</p>
 				<br>
 				
 				<!-- if response data has been provided for th instance, recursively render it -->
-				{% if ('%s~%s' % (question['format'], ins) in responses) %}
-					{{ render_section(questions[question['format']], responses['%s~%s' % (question['format'], ins)]) }}
+				{% if (subsection_id in responses) %}
+					{{ render_section(questions[question['format']], responses[subsection_id]) }}
 				{% else %}
-					Incomplete instance
+					<p>Incomplete instance</p>
 					<br>
 				{% endif %}
 			{% endfor %}

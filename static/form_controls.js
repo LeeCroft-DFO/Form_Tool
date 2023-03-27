@@ -95,6 +95,18 @@ function add_sec_instance(id, fieldset){
 		input_hidden.name = `~${id}`;
 		input_hidden.value = num_instances[id];
 		
+		// create a text input for the instance name
+		var input_name = document.createElement('input');
+		input_name.type = 'text';
+		input_name.name = `~${id}_subsection_instance_name`;
+		input_name.required = true;
+		
+		// create a help tooltip
+		var label_help = document.createElement('label');
+		label_help.className = 'question-help';
+		label_help.title = 'Please provide a short name.';
+		label_help.innerHTML = '?';
+		
 		// create an edit instance button and give it a click listener to update the value of a hidden input field to the ID of the instance to be edited (navigation to that page is then handled by the form submission in the default behaviour of the button)
 		var input_edit = document.createElement('input');
 		input_edit.type = 'submit';
@@ -115,6 +127,8 @@ function add_sec_instance(id, fieldset){
 		
 		// add the created elements to the div container and add the div container to the DOM
 		div.appendChild(input_hidden);
+		div.appendChild(input_name);
+		div.appendChild(label_help);
 		div.appendChild(input_edit);
 		div.appendChild(input_del);
 		fieldset.appendChild(div);
@@ -174,7 +188,7 @@ window.onload = function pageInit() {
 		num_instances[node.id] = 0;
 		
 		// loop through each saved instance that was rebuilt when generating the template and record the highest ID number among these
-		var sec_instance_nums = node.parentNode.querySelectorAll(`input[name="${node.id}"]`);
+		var sec_instance_nums = node.parentNode.querySelectorAll(`input[name="~${node.id}"]`);
 		sec_instance_nums.forEach(function(instance_node){
 			num_instances[node.id] = Math.max(num_instances[node.id], Number(instance_node.value));
 		});

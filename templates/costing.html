@@ -14,7 +14,7 @@
 	
 	<!-- if the question is a section, the node should be rendered as an internal node (a collection of section instances) -->
 	{% if 'lu_questions' in question['format'] %}
-		{{render_section(question, responses[question['format']]) }}
+		{{render_section_collection(question, responses[question['format']], responses['%s_subsection_instance_name' % question['format']]) }}
 		
 	<!-- if the question is an object, the node should be rendered as an internal node (a collection of objects) -->
 	{% elif question['type'] == 'object' %}
@@ -84,28 +84,22 @@
 
 
 <!-- macro to render a question that generates sub-sections -->
-{% macro render_section(question, responses) %}
+{% macro render_section_collection(question, instance_nums, instance_names) %}
 
 	<fieldset name="sec_fieldset" class="object-fieldset">
 		<!-- hidden tag used to track the name associated with each group of section instances for use by javascript to control dynamic section instance manipulation -->
 		<p id="{{ question['format'] }}" name="section_id" class="invisible">
-			
-		<!-- one instance of the sub-section will always be created by default -->
-		<div id="{{ question['format'] }}~0">
-			<input type="hidden" name="~{{ question['format'] }}" value="0">
-			<input type="submit" name="sec_btn_edit" value="Edit Instance">
-		</div>
 		
-		<!-- if other instances exist in the saved responses, display them as well -->
-		{% for instance_num in responses %}
-			{% if (not(instance_num == '0')) %}
-				<div id="{{ question['format'] }}~{{ instance_num }}">
-					<input type="hidden" name="~{{ question['format'] }}" value="{{ instance_num }}">
-					<input type="submit" name="sec_btn_edit" value="Edit Instance">
-					<input type="button" name="sec_btn_del" value="Delete Instance">
-				</div>
-			{% endif %}
-		{% endfor %}
+		<!-- if there are no saved section instances, create one default instance -->
+		{% if instance_nums is undefined %}
+			{{ render_section_instance(question['format'], '0', '') }}
+			
+		<!-- otherwise, create the saved instances -->
+		{% else %}
+			{% for ind in range(instance_nums|length) %}
+				{{ render_section_instance(question['format'], instance_nums[ind], instance_names[ind]) }}
+			{% endfor %}
+		{% endif %}
 	</fieldset>
 	
 	<br>
@@ -113,6 +107,21 @@
 	<br>
 	<br>
 
+{% endmacro %}
+
+
+<!-- macro to create an instance of a section -->
+{% macro render_section_instance(section_name, instance_num, instance_name) %}
+	<div id="{{ section_name }}~{{ instance_num }}">
+		<input type="hidden" name="~{{ section_name }}" value="{{ instance_num }}">
+		<input type="text" name="~{{ section_name }}_subsection_instance_name" value="{{ instance_name }}" required>
+		<label class="question-help" title="Please provide a short name.">?</label>
+		<input type="submit" name="sec_btn_edit" value="Edit Instance">
+		
+		{% if (not(instance_num == '0')) %}
+			<input type="button" name="sec_btn_del" value="Delete Instance">
+		{% endif %}
+	</div>
 {% endmacro %}
 
 
