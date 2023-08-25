@@ -9,20 +9,32 @@
 <!-- macro to render a node in the tree structure of questions (node type is not yet specified) -->
 {% macro render_tree_node(question, responses, id_prefix) %}
 
-	<!-- display the label for the object -->
-	{{ render_label(question) }}
-	
 	<!-- if the question is a section, the node should be rendered as an internal node (a collection of section instances) -->
-	{% if 'lu_questions' in question['format'] %}
+	{% if 'sec_' in question['format'] %}
 		{{render_section_collection(question, responses[question['format']], responses['%s_subsection_instance_name' % question['format']]) }}
 		
-	<!-- if the question is an object, the node should be rendered as an internal node (a collection of objects) -->
-	{% elif question['type'] == 'object' %}
-		{{ render_object_collection(question, responses[question['question_short']], id_prefix) }}
-		
-	<!-- if the question is not an object, the node should be rendered as a child node (flat question) -->
 	{% else %}
-		{{ render_question(question, responses[question['question_short']], id_prefix) }}
+	
+		<!-- create a unique id prefix for the object -->
+		{% set id = '%s~%s' % (id_prefix, question['question_short']) %}
+		
+		<fieldset name="fieldset_{{ id }}" class="fieldset-borderless">
+	
+			<!-- display the label for the object -->
+			{{ render_label(question) }}
+			
+			<!-- if the question is an object, the node should be rendered as an internal node (a collection of objects) -->
+			{% if question['type'] == 'object' %}
+				{{ render_object_collection(question, responses[question['question_short']], id) }}
+				
+			<!-- if the question is not an object, the node should be rendered as a child node (flat question) -->
+			{% else %}
+				{{ render_question(question, responses[question['question_short']], id) }}
+				
+			{% endif %}
+			
+		</fieldset>
+		
 	{% endif %}
 	
 	<br>
@@ -30,13 +42,16 @@
 
 
 <!-- macro to create a collection of object instances (an internal node of the tree structure) -->
-{% macro render_object_collection(object_question, object_responses, id_prefix) %}
-
-	<!-- create a unique id prefix for the object -->
-	{% set id = '%s~%s' % (id_prefix, object_question['question_short']) %}
+{% macro render_object_collection(object_question, object_responses, id) %}
 			
 	<!-- hidden tag used to track id prefixes associated with each group of object instances for use by javascript to control dynamic object instance manipulation -->
 	<p id="{{ id }}" name="hidden_id" class="invisible">
+	
+	<!-- hidden tag used to track which object collections are mandatory in order to determine if a default instance should be created or not -->
+	{% if object_question['mandatory'] == 'yes' %}
+		<p id="{{ id }}" name="hidden_id_mandatory" class="invisible">
+	{% endif %}
+	
 	<br>
 	
 	<div>
@@ -56,7 +71,9 @@
 		{% endfor %}
 	</div>
 
-	<input type="button" id="{{ '%s_btn_add' % id }}" value="Add Instance">
+	{% if (object_question['max_responses'] > 1) %}
+		<input type="button" id="{{ '%s_btn_add' % id }}" value="Add Instance">
+	{% endif %}
 	<br>
 	<br>
 {% endmacro %}
@@ -78,7 +95,9 @@
 		</fieldset>
 		
 		<!-- create a button to allow for dynamic deletion of the object instance -->
-		<input type="button" name="obj_btn_del" value="Delete Instance">
+		{% if (object_question['max_responses'] > 1) %}
+			<input type="button" name="obj_btn_del" value="Delete Instance">
+		{% endif %}
 	</div>
 {% endmacro %}
 
@@ -86,7 +105,11 @@
 <!-- macro to render a question that generates sub-sections -->
 {% macro render_section_collection(question, instance_nums, instance_names) %}
 
-	<fieldset name="sec_fieldset" class="object-fieldset">
+		<h2>{{ question['question_title'] }}</h2>
+
+		<!-- display the label for the object -->
+		{{ render_label(question) }}
+
 		<!-- hidden tag used to track the name associated with each group of section instances for use by javascript to control dynamic section instance manipulation -->
 		<p id="{{ question['format'] }}" name="section_id" class="invisible">
 		
@@ -100,11 +123,7 @@
 				{{ render_section_instance(question['format'], instance_nums[ind], instance_names[ind]) }}
 			{% endfor %}
 		{% endif %}
-	</fieldset>
 	
-	<br>
-	<input type="button" id="{{ '%s_btn_add' % question['format'] }}" value="Add Instance">
-	<br>
 	<br>
 
 {% endmacro %}
@@ -114,21 +133,30 @@
 {% macro render_section_instance(section_name, instance_num, instance_name) %}
 	<div id="{{ section_name }}~{{ instance_num }}">
 		<input type="hidden" name="~{{ section_name }}" value="{{ instance_num }}">
-		<input type="text" name="~{{ section_name }}_subsection_instance_name" value="{{ instance_name }}" required>
-		<label class="question-help" title="Please provide a short name.">?</label>
-		<input type="submit" name="sec_btn_edit" value="Edit Instance">
-		
-		{% if (not(instance_num == '0')) %}
-			<input type="button" name="sec_btn_del" value="Delete Instance">
-		{% endif %}
+		<input type="hidden" name="~{{ section_name }}_subsection_instance_name" value="{{ instance_num }}" required>
+		<input type="submit" name="sec_btn_edit" value="Go to section">
 	</div>
 {% endmacro %}
 
 
 <!-- button to view a table of contents for the questionnaire sections available so far -->
-<form method="get" action="/toc">
-	<input type="submit" value="View table of contents">
-</form>
+{% if not(section_title == 'Self-Assessment Questionnaire') %}
+	<form method="get" action="/costing">
+		<input type="hidden" name="action" value="goto">
+		<input type="hidden" name="question_index" value="sec_top">
+		<input type="submit" value="Return to table of contents">
+	</form>
+{% endif %}
+
+<h1>{{ section_title }}</h1>
+
+<p>{{ section_instructions }}</p>
+
+{% if section_title == 'Self-Assessment Questionnaire' %}
+	<p>Sections complete: {{ sections_complete }} / {{ sections_total }}</p>
+{% endif %}
+
+<br>
 
 <!-- main form containing the question fields -->
 <form method="post" action="/costing">
@@ -143,14 +171,22 @@
 	
 	<br>
 	<br>
-	<br>
-	<br>
 	
-	<input type="submit" value="Submit and return to table of contents">
+	{% if not(section_title == 'Self-Assessment Questionnaire') %}
+		<input type="submit" value="Submit and return to table of contents">
+	{% endif %}
 </form>
+
+{% if section_title == 'Self-Assessment Questionnaire' %}
+	<p>Sections complete: {{ sections_complete }} / {{ sections_total }}</p>
+{% endif %}
 
 <!-- button to view a report for all responses given so far -->
 <form method="get" action="/report">
-	<input type="submit" value="View partial report">
+	{% if sections_complete == sections_total %}
+		<input type="submit" value="View full report">
+	{% else %}
+		<input type="submit" value="View partial report">
+	{% endif %}
 </form>
 

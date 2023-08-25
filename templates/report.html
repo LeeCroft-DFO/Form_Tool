@@ -10,17 +10,18 @@
 	{% for question in section_questions %}
 	
 		<!-- if the question represents a subsection -->
-		{% if 'lu_questions' in question['format'] %}
+		{% if 'sec_' in question['format'] %}
+			{% set sec_level = question['question_title'].count('.') + 1 %}			
+
+			<h{{ sec_level }}>{{ question['question_title'] }}</h{{ sec_level }}>
 			{{ render_label(question) }}
+			<br>
 			<br>
 			
 			<!-- for each instance created for the subsection -->
 			{% for ind in range(section_responses[question['format']]|length) %}
 			
 				{% set subsection_id = '%s~%s' % (question['format'], section_responses[question['format']][ind]) %}
-
-				<p>{{ section_responses['%s_subsection_instance_name' % question['format']][ind] }}</p>
-				<br>
 				
 				<!-- if response data has been provided for th instance, recursively render it -->
 				{% if (subsection_id in responses) %}

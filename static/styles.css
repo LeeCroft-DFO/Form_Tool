@@ -5,7 +5,12 @@
 }
 
 .object-fieldset{
-	display: inline-table
+	display: inline-table;
+	width: 60%;
+}
+
+.fieldset-borderless{
+	border: 0;
 }
 
 .invisible{

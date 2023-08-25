@@ -1,23 +1,24 @@
 <!-- macro to render question labels -->
 {% macro render_label(question) %}
-	<label>
-		<!-- if the question is mandatory, display an asterisk -->
-		{% if question['mandatory'] == "yes" %}
-			*
-		{% endif %}
+	{% if not(question['question_long'] == '') %}
+		<label>
+			<!-- if the question is mandatory, display an asterisk -->
+			{% if question['mandatory'] == "yes" %}
+				*
+			{% endif %}
+			
+			{{ question['question_long'] }}
+		</label>
 		
-		{{ question['question_long'] }}
-	</label>
-	
-	<!-- create a help icon with a tooltip to display more information about the response required for the question -->
-	<label class="question-help" title="{{ question['help'] }}">?</label>
-	<br>
+		<!-- create a help icon with a tooltip to display more information about the response required for the question -->
+		<label class="question-help" title="{{ question['help'] }}">?</label>
+		<br>
+		<br>
+	{% endif %}
 {% endmacro %}
 
 <!-- macro to render question form fields -->
-{% macro render_question(question, saved_responses, id_prefix) %}
-	
-	{% set name = '%s~%s' % (id_prefix, question['question_short']) %}
+{% macro render_question(question, saved_responses, name) %}
 	
 	<!-- use a variable to validate form fields as being required if the question is mandatory -->
 	{% if question['mandatory'] == "yes" %}
@@ -43,7 +44,7 @@
 	
 	<!-- long-form fields use a textarea -->	
 	{% elif question['format'] == "textarea" %}
-		<textarea type="text" name="{{ name }}" rows="10" cols="30" {{ required }}>{{ saved_responses[0] }}</textarea>
+		<textarea type="text" name="{{ name }}" rows="10" cols="120" {{ required }}>{{ saved_responses[0] }}</textarea>
 	
 	<!-- selection type questions and boolean (checkboxes) both use the select field -->
 	{% elif (question['format'] == "select") or (question['format'] == "checkbox") %}
@@ -104,7 +105,7 @@
 		
 		<ul>
 			{% for response_opt in question['responses'] %}
-				{% if (response_opt['response'] == response) and (not(response_opt['response'] == '')) %}
+				{% if (response_opt['response'] == response) and (not(response_opt['response'] == '')) and (not(response_opt['recommendations']|length == 0)) %}
 					<!-- track that a recommendation has been found -->
 					{% set ns.recommendations = True %}
 					

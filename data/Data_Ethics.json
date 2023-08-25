@@ -1,0 +1,1251 @@
+﻿{
+    "sec_top": [
+        {
+            "id": "PTB00400",
+            "question_short": "sec_necessity",
+			"question_title": "1. Necessity",
+            "question_long": "The necessity for the Activity is determined through how the Activity addresses the needs of Canadians, the department and other potential stakeholders. This can typically be identified by answering the question of how the results of the Activity will benefit these groups.",
+            "help": "",
+            "notes": "",
+            "mandatory": "yes",
+            "max_responses": 99,
+            "type": "object",
+            "format": "sec_necessity",
+            "listItem": "yes"        
+        },
+		{
+            "id": "PTB00400",
+            "question_short": "sec_observation",
+			"question_title": "2. Observations",
+            "question_long": "The necessity for the Activity is further validated by the identification of related work addressing similar needs or providing relevant sources of data to the Activity. A scan of related work should be performed both across the internal work of the department as well as across external work. This scan will assist in identifying useful resources for the Activity and avoiding duplication of efforts.",
+            "help": "",
+            "notes": "",
+            "mandatory": "yes",
+            "max_responses": 99,
+            "type": "object",
+            "format": "sec_observation",
+            "listItem": "yes"        
+        },
+		{
+            "id": "PTB00400",
+            "question_short": "sec_working_assumptions",
+			"question_title": "3. Working Assumptions",
+            "question_long": "The working assumptions of the Activity related to the data should be defined based on the requirements that must be satisfied in order for the Activity to fulfill the necessity outlined in Step 1.",
+            "help": "",
+            "notes": "",
+            "mandatory": "yes",
+            "max_responses": 99,
+            "type": "object",
+            "format": "sec_working_assumptions",
+            "listItem": "yes"        
+        },
+		{
+            "id": "PTB00400",
+            "question_short": "sec_proportionality",
+			"question_title": "4. Proportionality",
+            "question_long": "Ethical issues that may potentially arise from the handling of data throughout the Activity must be considered. Flexibility of the Activity working assumptions should be considered as a means to mitigate ethical issues that are identified.",
+            "help": "",
+            "notes": "",
+            "mandatory": "yes",
+            "max_responses": 99,
+            "type": "object",
+            "format": "sec_proportionality",
+            "listItem": "yes"        
+        },
+		{
+            "id": "PTB00400",
+            "question_short": "sec_alternatives",
+			"question_title": "5. Alternatives",
+            "question_long": "The necessities of an Activity may be achievable through more than one approach. Alternatives to the methods and approaches selected for the Activity should be given due consideration, particularly in the context of whether they may achieve better proportionality with respect to ethical considerations around data.",
+            "help": "",
+            "notes": "",
+            "mandatory": "yes",
+            "max_responses": 99,
+            "type": "object",
+            "format": "sec_alternatives",
+            "listItem": "yes"        
+        }
+    ],
+	"sec_necessity": [
+		{
+            "id": "ATB00100",
+            "question_short": "neccessity_canadians",
+            "question_long": "Identify how the Activity addresses needs for Canadians. Note that the needs of Canadians can be indirectly addressed through the support of programs and services within the department. For instance, an activity that aims to measure out-of-season catch quantities of a species of fish supports the detection of illegal fishing, which in turn helps Canadians by improving sustainability and economic stability in the fishing industry. If adressing the needs of Canadians is not applicable to the Activity, provide a brief explanation of why.",
+            "help": "",
+            "notes": "",
+            "mandatory": "yes",
+            "max_responses": 1,
+            "type": "string",
+            "format": "textarea",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "",
+                    "score": 0,
+                    "recommendations": []
+                }
+            ]
+        },
+		{
+            "id": "ATB00100",
+            "question_short": "necessity_department",
+            "question_long": "Identify how the Activity addresses the needs for the department. Where possible, relate these needs to the departmental mandate. If adressing the needs of the department is not applicable to the Activity, provide a brief explanation of why.",
+            "help": "",
+            "notes": "",
+            "mandatory": "yes",
+            "max_responses": 1,
+            "type": "string",
+            "format": "textarea",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "",
+                    "score": 0,
+                    "recommendations": []
+                }
+            ]
+        },
+		{
+            "id": "ATB00100",
+            "question_short": "necessity_stakeholders",
+            "question_long": "If the Activity addresses needs for other stakeholders (e.g., partnered departments or academic institutions), identify who the groups of stakeholders are and how the Activity addresses needs for these groups.",
+            "help": "",
+            "notes": "",
+            "mandatory": "no",
+            "max_responses": 1,
+            "type": "string",
+            "format": "textarea",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "",
+                    "score": 0,
+                    "recommendations": []
+                }
+            ]
+        }
+    ],
+	"sec_observation": [
+        {
+            "id": "ATB00100",
+            "question_short": "observations_internal",
+            "question_long": "List any related projects (archived, in production or in development) within the department that aim to address similar needs or that provide sources of data relevant to the Activity. For each item, provide a brief description and explanation of why it does not fully meet the necessity being addressed by the Activity.",
+            "help": "",
+            "notes": "",
+            "mandatory": "no",
+            "max_responses": 99,
+            "type": "object",
+            "format": "obj_observations_project",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "",
+                    "score": 0,
+                    "recommendations": []
+                }
+            ]
+        },
+		{
+            "id": "ATB00100",
+            "question_short": "observations_external",
+            "question_long": "List any related projects outside of the department (e.g., within other departments, within academia, within industry) that aim to address similar needs or that provide sources of data relevant to the Activity. Provide a brief description of each item. For each item, provide a brief description and explanation of why it does not fully meet the necessity being addressed by the Activity.",
+            "help": "",
+            "notes": "",
+            "mandatory": "no",
+            "max_responses": 99,
+            "type": "object",
+            "format": "obj_observations_project",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "",
+                    "score": 0,
+                    "recommendations": []
+                }
+            ]
+        }
+    ],
+	"sec_working_assumptions": [
+        {
+            "id": "ATB00100",
+            "question_short": "assumptions_data_source",
+            "question_long": "For each source of data required by the Activity, provide the following information:",
+            "help": "",
+            "notes": "",
+            "mandatory": "yes",
+            "max_responses": 99,
+            "type": "object",
+            "format": "obj_assumptions_data_source",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "",
+                    "score": 0,
+                    "recommendations": []
+                }
+            ]
+        },
+		{
+            "id": "ATB00100",
+            "question_short": "assumptions_combined_data",
+            "question_long": "If multiple sources of data are used, describe the implications of their combined usage. Does each source of data support an isolated component of the Activity or are there components that require the combination of sources of data to function?",
+            "help": "",
+            "notes": "",
+            "mandatory": "no",
+            "max_responses": 1,
+            "type": "string",
+            "format": "textarea",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "",
+                    "score": 0,
+                    "recommendations": [
+                        {"recommendation": "When exploring ethical considerations in Section 4.2, ensure that the implications of the combined usage of multiple sources of data have been considered. For example, the combination of two datasets may result in a new dataset with a higher departmental sensitivity classification than has been assigned to either of the two independent datasets."}
+                    ]
+                }
+            ]
+        },
+		{
+            "id": "CON00100",
+            "question_short": "__togle_yes__assumptions_new_data",
+            "question_long": "Will new sources of data be generated by the Activity?",
+            "help": "",
+            "notes": "",
+            "mandatory": "yes",
+            "max_responses": 1,
+            "type": "string",
+            "format": "select",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "Yes",
+                    "score": 0,
+                    "recommendations": [
+                        {"recommendation": "When new sources of data are generated, they should be subject to quality control to ensure that they will be fit for purpose. See [Privacy and Security] for more details."},
+						{"recommendation": "When new sources of data are generated, their departmental sensitivity classification must be considered to ensure that they are managed accordingly."}
+                    ]
+                },
+                {
+                    "response": "No",
+                    "score": 0,
+                    "recommendations": []
+                }
+            ]
+        },
+		{
+            "id": "ATB00100",
+            "question_short": "assumptions_new_data",
+            "question_long": "Provide details for each each new source of data generated by the Activity",
+            "help": "",
+            "notes": "",
+            "mandatory": "yes",
+            "max_responses": 99,
+            "type": "object",
+            "format": "obj_assumptions_new_data_source",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "",
+                    "score": 0,
+                    "recommendations": []
+                }
+            ]
+        },
+		{
+            "id": "CON00100",
+            "question_short": "__togle_yes__assumptions_services",
+            "question_long": "Does the Activity involve the development of services (e.g., tools, dashboards, APIs, etc.)?",
+            "help": "",
+            "notes": "",
+            "mandatory": "yes",
+            "max_responses": 1,
+            "type": "string",
+            "format": "select",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "Yes",
+                    "score": 0,
+                    "recommendations": []
+                },
+                {
+                    "response": "No",
+                    "score": 0,
+                    "recommendations": []
+                }
+            ]
+        },
+		{
+            "id": "ATB00100",
+            "question_short": "assumptions_services",
+            "question_long": "Who are the users of the services (i.e., the parties who have access to functionality and/or results) and what degree of access will they have to the sources of data?",
+            "help": "",
+            "notes": "",
+            "mandatory": "yes",
+            "max_responses": 1,
+            "type": "string",
+            "format": "textarea",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "",
+                    "score": 0,
+                    "recommendations": [
+						{"recommendation": "Access by the users to data should be limited to the degree needed in order to prevent unnecessary privacy risks."},
+                        {"recommendation": "The services should be secured against usage by unauthorized users."}
+                    ]
+                }
+            ]
+        },
+		{
+            "id": "CON00100",
+            "question_short": "__togle_yes__assumptions_results",
+            "question_long": "Does the Activity involve the delivery of results (e.g., data products or reports) to other parties?",
+            "help": "",
+            "notes": "",
+            "mandatory": "yes",
+            "max_responses": 1,
+            "type": "string",
+            "format": "select",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "Yes",
+                    "score": 0,
+                    "recommendations": []
+                },
+                {
+                    "response": "No",
+                    "score": 0,
+                    "recommendations": []
+                }
+            ]
+        },
+		{
+            "id": "ATB00100",
+            "question_short": "assumptions_results",
+            "question_long": "Who are the intended recipients of the results and what degree of access will they have to the sources of data?",
+            "help": "",
+            "notes": "",
+            "mandatory": "yes",
+            "max_responses": 1,
+            "type": "string",
+            "format": "textarea",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "",
+                    "score": 0,
+                    "recommendations": [
+                        {"recommendation": "Access by the intended recipients to the data sources should be limited to the degree needed in order to prevent unnecessary privacy risks."}
+                    ]
+                }
+            ]
+        }
+    ],
+	"sec_proportionality": [
+        {
+            "id": "ATB00100",
+            "question_short": "sec_sensitivity",
+			"question_title": "4.1. Sensitivity",
+            "question_long": "The sensitivity of each data source must be assessed.",
+            "help": "",
+            "notes": "",
+            "mandatory": "yes",
+            "max_responses": 99,
+            "type": "object",
+            "format": "sec_sensitivity",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "",
+                    "score": 0,
+                    "recommendations": []
+                }
+            ]
+        },
+		{
+            "id": "ATB00100",
+            "question_short": "sec_considerations",
+			"question_title": "4.2. Ethical Considerations",
+            "question_long": "Potential ethical issues around the collection, usage and dissemination of data in the Activity must be assessed. Note that a potential ethical issue does not necessarily imply ethical shortcomings in the Activity but merely highlights risks that have been identified. Provide a brief summary of the factors considered for each of the topics within this section along with any potential ethical issues identified.",
+            "help": "",
+            "notes": "",
+            "mandatory": "yes",
+            "max_responses": 99,
+            "type": "object",
+            "format": "sec_considerations",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "",
+                    "score": 0,
+                    "recommendations": []
+                }
+            ]
+        },
+		{
+            "id": "ATB00100",
+            "question_short": "sec_flexibility",
+			"question_title": "4.3. Flexibility",
+            "question_long": "The flexibility of the Activity working assumptions must be assessed. Under less stringent working assumptions, ethical issues that have been identified may be mitigated. In the event that no ethical issues were identified, it is still recommended to perform this assessment as means of checking whether any risks associated with the Activity can be reduced. Consider the areas of flexibility within this section. For each question, if adjustments cannot be made, briefly state the Activity requirements or other impediments preventing the adjustments.",
+            "help": "",
+            "notes": "",
+            "mandatory": "yes",
+            "max_responses": 99,
+            "type": "object",
+            "format": "sec_flexibility",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "",
+                    "score": 0,
+                    "recommendations": []
+                }
+            ]
+        }
+    ],
+	"sec_sensitivity": [
+        {
+            "id": "ATB00100",
+            "question_short": "sensitivity_data",
+            "question_long": "For each source of data, assess its sensitivity by answering the following questions.",
+            "help": "",
+            "notes": "",
+            "mandatory": "yes",
+            "max_responses": 99,
+            "type": "object",
+            "format": "obj_proportionality_sensitivity",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "",
+                    "score": 0,
+                    "recommendations": []
+                }
+            ]
+        }
+    ],
+	"sec_considerations": [
+        {
+            "id": "ATB00100",
+            "question_short": "considerations_collection",
+            "question_long": "If data is newly collected for the Activity, consider whether the means of collection is suitable. For example, consider whether it is necessary to obtain informed consent for the collection activities and whether the data collected goes beyond the scope of what is required to meet the Activity necessities.",
+            "help": "",
+            "notes": "",
+            "mandatory": "yes",
+            "max_responses": 1,
+            "type": "string",
+            "format": "textarea",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "",
+                    "score": 0,
+                    "recommendations": [
+						{"recommendation": "Collection of data often presents an ethical dilemma in the conflict between the benefit from the intended purpose and the infringement on personal privacy or other potential inconveniences imposed by the collection of the data. Identification and management of such conflicts can be facilitated by the [ethical dilemmas supporting process]."},
+                        {"recommendation": "Ensure that proper authority to collect the data is held and that where applicable, permission has been obtained for data collection."}
+                    ]
+                }
+            ]
+        },
+		{
+            "id": "ATB00100",
+            "question_short": "considerations_repurposing",
+            "question_long": "If existing sources of data are repurposed in the Activity, consider whether the goals of the Activity align with the original intended use of the data and whether permission must be obtained for the new usage.",
+            "help": "",
+            "notes": "",
+            "mandatory": "yes",
+            "max_responses": 1,
+            "type": "string",
+            "format": "textarea",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "",
+                    "score": 0,
+                    "recommendations": [
+                        {"recommendation": "When repurposing data all considerations around authority and permission to use the data, privacy and security of the data and quality of the data must be examined in the context of the new purpose for which the data is being used."}
+                    ]
+                }
+            ]
+        },
+		{
+            "id": "ATB00100",
+            "question_short": "considerations_usage_sensitive",
+            "question_long": "Ethical issues may arise from the use of data in a non-proportional manner. This is particularly pertinent for sensitive data but also applies to non-sensitive data. For example, it may be within reason to use electronic fishing monitoring technologies to study the bycatch of endangered species with respect to geographic locations. Whereas a simpler survey of overall quantities caught across different species does not require such detailed data and could be conducted using catch logs. Consider whether the Activity uses any data that is not strictly necessary and whether the data is sensitive or non-sensitive.",
+            "help": "",
+            "notes": "",
+            "mandatory": "yes",
+            "max_responses": 1,
+            "type": "string",
+            "format": "textarea",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "",
+                    "score": 0,
+                    "recommendations": [
+                        {"recommendation": "Usage of sensitive data often presents an ethical dilemma in the conflict between the benefit from the intended purpose and the infringement on personal privacy or other sensitive aspects of the data. Identification and management of such conflicts can be facilitated by the [ethical dilemmas supporting process]."}
+                    ]
+                }
+            ]
+        },
+		{
+            "id": "ATB00100",
+            "question_short": "considerations_quality",
+            "question_long": "Poor quality of data (bias, inaccuracy, etc.) according to the departmental data quality dimensions can be an ethical issue, potentially leading to harmful or costly consequences. Sources of data should be evaluated using the Data Quality Assessment Process [Note: to be linked once published] to identify and address any data quality non-conformances. For each source of data, provide a summary of the business rules and metrics used as well as the results obtained. For sources of data not assessed, provide a brief explanation on why assessment was not needed.",
+            "help": "",
+            "notes": "",
+            "mandatory": "yes",
+            "max_responses": 1,
+            "type": "string",
+            "format": "textarea",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "",
+                    "score": 0,
+                    "recommendations": [
+                        {"recommendation": "The [data quality decision tree] should be used to identify the data quality scan steps to be taken for each data source."}
+                    ]
+                }
+            ]
+        },
+		{
+            "id": "ATB00100",
+            "question_short": "considerations_usage_general",
+            "question_long": "The manner in which data is used can be an ethical issue. Examples include data used for unjust discrimination in decision-making, or data analysis that misinterprets correlation as causation. Consider whether there are any potential concerns around the use of data in the Activity.",
+            "help": "",
+            "notes": "",
+            "mandatory": "yes",
+            "max_responses": 1,
+            "type": "string",
+            "format": "textarea",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "",
+                    "score": 0,
+                    "recommendations": [
+                        {"recommendation": "Usage of data often presents an ethical dilemma in the conflict between the benefit from the intended purpose and the imposition of using the data in a particular manner or the perceived negative impacts that may occur. Identification and management of such conflicts can be facilitated by the [ethical dilemmas supporting process]."}
+                    ]
+                }
+            ]
+        }
+    ],
+	"sec_flexibility": [
+        {
+            "id": "ATB00100",
+            "question_short": "flexibility_quality_1",
+            "question_long": "Record-level data can be substituted with aggregate data, or the granularity of aggregate can data be coarsened to reduce privacy concerns.",
+            "help": "",
+            "notes": "",
+            "mandatory": "yes",
+            "max_responses": 1,
+            "type": "object",
+            "format": "obj_proportionality_flexibility",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "",
+                    "score": 0,
+                    "recommendations": []
+                }
+            ]
+        },
+		{
+            "id": "ATB00100",
+            "question_short": "flexibility_quality_2",
+            "question_long": "Data quality dimensions can be improved to mitigate risks such as bias or inaccurate data.",
+            "help": "",
+            "notes": "",
+            "mandatory": "yes",
+            "max_responses": 1,
+            "type": "object",
+            "format": "obj_proportionality_flexibility",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "",
+                    "score": 0,
+                    "recommendations": [
+                        {"recommendation": ""}
+                    ]
+                }
+            ]
+        },
+		{
+            "id": "ATB00100",
+            "question_short": "flexibility_quantity_1",
+            "question_long": "A smaller sample of data can be used to reduce invasive impacts of data collection and usage.",
+            "help": "",
+            "notes": "",
+            "mandatory": "yes",
+            "max_responses": 1,
+            "type": "object",
+            "format": "obj_proportionality_flexibility",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "",
+                    "score": 0,
+                    "recommendations": []
+                }
+            ]
+        },
+		{
+            "id": "ATB00100",
+            "question_short": "flexibility_quantity_2",
+            "question_long": "A larger sample of data can be used to increase the reliability of the data.",
+            "help": "",
+            "notes": "",
+            "mandatory": "yes",
+            "max_responses": 1,
+            "type": "object",
+            "format": "obj_proportionality_flexibility",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "",
+                    "score": 0,
+                    "recommendations": []
+                }
+            ]
+        },
+		{
+            "id": "ATB00100",
+            "question_short": "flexibility_content_1",
+            "question_long": "Sensitive attributes can be omitted from the data (e.g., removal of sensitive columns from tabular data, removal of facial identity from images, etc.).",
+            "help": "",
+            "notes": "",
+            "mandatory": "yes",
+            "max_responses": 1,
+            "type": "object",
+            "format": "obj_proportionality_flexibility",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "",
+                    "score": 0,
+                    "recommendations": []
+                }
+            ]
+        },
+		{
+            "id": "ATB00100",
+            "question_short": "flexibility_content_2",
+            "question_long": "Other non-sensitive attributes can be added to improve the utility of the data.",
+            "help": "",
+            "notes": "",
+            "mandatory": "yes",
+            "max_responses": 1,
+            "type": "object",
+            "format": "obj_proportionality_flexibility",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "",
+                    "score": 0,
+                    "recommendations": []
+                }
+            ]
+        },
+		{
+            "id": "ATB00100",
+            "question_short": "flexibility_risk_1",
+            "question_long": "Security measures can be implemented to protect the data.",
+            "help": "",
+            "notes": "",
+            "mandatory": "yes",
+            "max_responses": 1,
+            "type": "object",
+            "format": "obj_proportionality_flexibility",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "",
+                    "score": 0,
+                    "recommendations": []
+                }
+            ]
+        },
+		{
+            "id": "ATB00100",
+            "question_short": "flexibility_other_1",
+            "question_long": "If any other possible adjustments to the Activity working assumptions may help to address ethical concerns identified in Section 4.2, briefly describe them.",
+            "help": "",
+            "notes": "",
+            "mandatory": "no",
+            "max_responses": 1,
+            "type": "string",
+            "format": "textarea",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "",
+                    "score": 0,
+                    "recommendations": []
+                }
+            ]
+        }
+    ],
+	"sec_alternatives": [
+        {
+            "id": "ATB00100",
+            "question_short": "alternatives_list",
+            "question_long": "Provide a list of notable alternatives for the Activity, give a brief description for each alternative as well as the reasoning against its usage. If no viable alternatives have been identified, provide a brief explanation as to why the methods and approaches used in the Activity are the only reasonable choice.",
+            "help": "",
+            "notes": "",
+            "mandatory": "yes",
+            "max_responses": 1,
+            "type": "string",
+            "format": "textarea",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "",
+                    "score": 0,
+                    "recommendations": []
+                }
+            ]
+        }
+    ],
+	"obj_observations_project": [
+        {
+            "id": "CON00100",
+            "question_short": "obj_observations_project_name",
+            "question_long": "What is the name of the project?",
+            "help": "",
+            "notes": "",
+            "mandatory": "yes",
+            "max_responses": 1,
+            "type": "string",
+            "format": "text",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "",
+                    "score": 0,
+                    "recommendations": []
+                }
+            ]
+        },
+		{
+            "id": "CON00100",
+            "question_short": "obj_observations_project_description",
+            "question_long": "Provide a brief description of the project.",
+            "help": "",
+            "notes": "",
+            "mandatory": "yes",
+            "max_responses": 1,
+            "type": "string",
+            "format": "textarea",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "",
+                    "score": 0,
+                    "recommendations": []
+                }
+            ]
+        },
+		{
+            "id": "CON00100",
+            "question_short": "obj_observations_project_explanation",
+            "question_long": "Provide a brief explanation of why it does not fully meet the necessity being addressed by the Activity.",
+            "help": "",
+            "notes": "",
+            "mandatory": "yes",
+            "max_responses": 1,
+            "type": "string",
+            "format": "textarea",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "",
+                    "score": 0,
+                    "recommendations": []
+                }
+            ]
+        }
+    ],
+	"obj_assumptions_data_source": [
+        {
+            "id": "CON00100",
+            "question_short": "obj_assumptions_data_source_desc",
+            "question_long": "Provide a brief description of the data and how it will be used (e.g., reporting, statistical analysis, advanced analytics, decision-making).",
+            "help": "",
+            "notes": "",
+            "mandatory": "yes",
+            "max_responses": 1,
+            "type": "string",
+            "format": "textarea",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "",
+                    "score": 0,
+					"recommendations": [
+                        {"recommendation": "The intended usage of the data helps to determine the degree of quality control required. For instance, data used to support critical decision-making should be subject to close scrutiny during quality control. See [Data Quality] for more details."}
+                    ]
+                }
+            ]
+        },
+		{
+            "id": "CON00100",
+            "question_short": "obj_assumptions_data_source_origin",
+            "question_long": "Indicate the origin of data.",
+            "help": "",
+            "notes": "",
+            "mandatory": "yes",
+            "max_responses": 1,
+            "type": "string",
+            "format": "select",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "Administrative (Internal)",
+                    "score": 0,
+					"recommendations": [
+                        {"recommendation": "When using internal sources of data, the data steward, if one has been assigned, should be contacted to gain a better understanding of the quality of the data asset. This will help in determining what additional quality control may be required for the usage of this data asset. See [Data Quality] for more details."}
+                    ]
+                },
+                {
+                    "response": "Operational (Internal)",
+                    "score": 0,
+					"recommendations": [
+                        {"recommendation": "When using an internal source of data, the data steward, if one has been assigned, should be contacted to gain a better understanding of the quality of the data asset. This will help in determining what additional quality control may be required for the usage of this data asset. See [Data Quality] for more details."}
+                    ]
+                },
+                {
+                    "response": "Scientific (Internal)",
+                    "score": 0,
+					"recommendations": [
+                        {"recommendation": "When using an internal source of data, the data steward, if one has been assigned, should be contacted to gain a better understanding of the quality of the data asset. This will help in determining what additional quality control may be required for the usage of this data asset. See [Data Quality] for more details."}
+                    ]
+                },
+				{
+                    "response": "Other (Internal)",
+                    "score": 0,
+					"recommendations": [
+                        {"recommendation": "When using an internal source of data, the data steward, if one has been assigned, should be contacted to gain a better understanding of the quality of the data asset. This will help in determining what additional quality control may be required for the usage of this data asset. See [Data Quality] for more details."}
+                    ]
+                },
+				{
+                    "response": "Shared (External)",
+                    "score": 0,
+					"recommendations": [
+                        {"recommendation": "When using an external source of data, information should be sought on stewardship of the data and quality control that has been applied. If possible, the data steward should be contacted to gain a better understanding of the quality of the data asset. This will help in determining what additional quality control may be required for the usage of this data asset. See [Data Quality] for more details."}
+                    ]
+                },
+				{
+                    "response": "Public (External)",
+                    "score": 0,
+					"recommendations": [
+                        {"recommendation": "When using an external source of data, information should be sought on stewardship of the data and quality control that has been applied. If possible, the data steward should be contacted to gain a better understanding of the quality of the data asset. This will help in determining what additional quality control may be required for the usage of this data asset. See [Data Quality] for more details."}
+                    ]
+                }
+            ]
+        },
+		{
+            "id": "CON00100",
+            "question_short": "obj_assumptions_data_source_external_origin",
+            "question_long": "If the origin is external to the department, state the organization or repository from which the data was obtained.",
+            "help": "",
+            "notes": "",
+            "mandatory": "no",
+            "max_responses": 1,
+            "type": "string",
+            "format": "text",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "",
+                    "score": 0,
+                    "recommendations": []
+                }
+            ]
+        },
+		{
+            "id": "CON00100",
+            "question_short": "obj_assumptions_data_source_granularity",
+            "question_long": "Indicate the granularity of data.",
+            "help": "",
+            "notes": "",
+            "mandatory": "yes",
+            "max_responses": 1,
+            "type": "string",
+            "format": "select",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "Record-level",
+                    "score": 0,
+					"recommendations": [
+                        {"recommendation": "Record-level data should be carefully scrutinized for the potential to reveal sensitive information. If the data contains personal information, appropriate measures of privacy and security must be put in place. See [Privacy and Security] for more details."}
+                    ]
+                },
+                {
+                    "response": "Aggregate",
+                    "score": 0,
+					"recommendations": [
+                        {"recommendation": "Aggregation of data is not guaranteed to protect sensitive information. For instance, personal records that have been grouped into bins may be recovered in some situations by attacks that draw on auxiliary sources of information. The data should be scruitinezed to ensure that the level of aggregation is appropriate. See [Privacy and Security] for more details."}
+                    ]
+                }
+            ]
+        },
+		{
+            "id": "CON00100",
+            "question_short": "obj_assumptions_data_source_granularity",
+            "question_long": "If the granularity is record-level, specify what one record represents (for non-tabular data, a record could be an image, a document, etc.). If the granularity is aggregate, specify what the level of aggregation is.",
+            "help": "",
+            "notes": "",
+            "mandatory": "yes",
+            "max_responses": 1,
+            "type": "string",
+            "format": "textarea",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "",
+                    "score": 0,
+                    "recommendations": []
+                }
+            ]
+        },
+		{
+            "id": "CON00100",
+            "question_short": "obj_assumptions_data_source_quantity",
+            "question_long": "Specify the quantity of the data required.",
+            "help": "",
+            "notes": "",
+            "mandatory": "yes",
+            "max_responses": 1,
+            "type": "string",
+            "format": "textarea",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "",
+                    "score": 0,
+                    "recommendations": []
+                }
+            ]
+        },
+		{
+            "id": "CON00100",
+            "question_short": "obj_assumptions_data_source_attributes",
+            "question_long": "Specify the data attributes required. For tabular data, list the required columns. For non-tabular data, list any essential properties of the data.",
+            "help": "",
+            "notes": "",
+            "mandatory": "yes",
+            "max_responses": 1,
+            "type": "string",
+            "format": "textarea",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "",
+                    "score": 0,
+                    "recommendations": []
+                }
+            ]
+        },
+		{
+            "id": "CON00100",
+            "question_short": "obj_assumptions_data_source_linkages",
+            "question_long": "Specify any linkages between sources of data required. In other words, if the source of data is to be combined with others (e.g., joining relational tabular data on a common key), list what other sources of data will be combined and what relationship between the sources of data will be used to perform the combination.",
+            "help": "",
+            "notes": "",
+            "mandatory": "no",
+            "max_responses": 1,
+            "type": "string",
+            "format": "textarea",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "",
+                    "score": 0,
+                    "recommendations": []
+                }
+            ]
+        }
+    ],
+	"obj_assumptions_new_data_source": [
+        {
+            "id": "CON00100",
+            "question_short": "obj_assumptions_new_data_source_desc",
+            "question_long": "Provide a brief description of the data and the purpose it will serve.",
+            "help": "",
+            "notes": "",
+            "mandatory": "yes",
+            "max_responses": 1,
+            "type": "string",
+            "format": "textarea",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "",
+                    "score": 0,
+                    "recommendations": []
+                }
+            ]
+        },
+		{
+            "id": "CON00100",
+            "question_short": "obj_assumptions_new_data_source_granularity",
+            "question_long": "Indicate the granularity of data.",
+            "help": "",
+            "notes": "",
+            "mandatory": "yes",
+            "max_responses": 1,
+            "type": "string",
+            "format": "select",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "Record-level",
+                    "score": 0,
+					"recommendations": [
+                        {"recommendation": "Record-level data should be carefully scrutinized for the potential to reveal sensitive information. If the data contains personal information, appropriate measures of privacy and security must be put in place. See [Privacy and Security] for more details."}
+                    ]
+                },
+                {
+                    "response": "Aggregate",
+                    "score": 0,
+					"recommendations": [
+                        {"recommendation": "Aggregation of data is not guaranteed to protect sensitive information. For instance, personal records that have been grouped into bins may be recovered in some situations by attacks that draw on auxiliary sources of information. The data should be scruitinezed to ensure that the level of aggregation is appropriate. See [Privacy and Security] for more details."}
+                    ]
+                }
+            ]
+        },
+		{
+            "id": "CON00100",
+            "question_short": "obj_assumptions_new_data_source_granularity",
+            "question_long": "If the granularity is record-level, specify what one record represents (for non-tabular data, a record could be an image, a document, etc.). If the granularity is aggregate, specify what the level of aggregation is.",
+            "help": "",
+            "notes": "",
+            "mandatory": "yes",
+            "max_responses": 1,
+            "type": "string",
+            "format": "textarea",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "",
+                    "score": 0,
+                    "recommendations": []
+                }
+            ]
+        }
+    ],
+	"obj_proportionality_sensitivity": [
+        {
+            "id": "CON00100",
+            "question_short": "obj_proportionality_sensitivity_classification",
+            "question_long": "What is the minimum classification of the data as determined by the [departmental statement of sensitivity]?",
+            "help": "",
+            "notes": "",
+            "mandatory": "yes",
+            "max_responses": 1,
+            "type": "string",
+            "format": "select",
+            "listItem": "yes",
+            "responses": [
+				{
+                    "response": "Unclassified",
+                    "score": 0,
+                    "recommendations": []
+                },
+                {
+                    "response": "Protected - A",
+                    "score": 0,
+                    "recommendations": [
+                        {"recommendation": "Appropriate security controls must be put in place to prevent unauthorized access to the data. See [Privacy and Security] for more details."}
+                    ]
+                },
+                {
+                    "response": "Protected - B",
+                    "score": 0,
+                    "recommendations": [
+                        {"recommendation": "Appropriate security controls must be put in place to prevent unauthorized access to the data. See [Privacy and Security] for more details."}
+                    ]
+                },
+				{
+                    "response": "Protected - C",
+                    "score": 0,
+                    "recommendations": [
+                        {"recommendation": "Strict security controls must be put in place to prevent unauthorized access to the data. See [Privacy and Security] for more details."}
+                    ]
+                },
+				{
+                    "response": "Classified - Confidential",
+                    "score": 0,
+                    "recommendations": [
+                        {"recommendation": "Strict security controls must be put in place to prevent unauthorized access to the data. See [Privacy and Security] for more details."}
+                    ]
+                },
+				{
+                    "response": "Classified - Secret",
+                    "score": 0,
+                    "recommendations": [
+                        {"recommendation": "Strict security controls must be put in place to prevent unauthorized access to the data. See [Privacy and Security] for more details."}
+                    ]
+                },
+				{
+                    "response": "Classified - Top Secret",
+                    "score": 0,
+                    "recommendations": [
+                        {"recommendation": "Strict security controls must be put in place to prevent unauthorized access to the data. See [Privacy and Security] for more details."}
+                    ]
+                }
+            ]
+        },
+		{
+            "id": "CON00100",
+            "question_short": "obj_proportionality_sensitivity_indv_group",
+            "question_long": "Specify whether the source of data pertains to information about individuals (e.g., employee records, fishing licenses, etc.), groups of people (e.g., community data, fishery statistics)or other information not directly pertinent to individuals/groups (e.g., in the case of geographic data, oceanographic data, etc.).",
+            "help": "",
+            "notes": "",
+            "mandatory": "yes",
+            "max_responses": 1,
+            "type": "string",
+            "format": "select",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "Individuals",
+                    "score": 0,
+                    "recommendations": [
+                        {"recommendation": "Appropriate controls on privacy and security must be put in place to ensure that there is no unauthorized access to personal information. See [Privacy and Security] for more details."}
+                    ]
+                },
+                {
+                    "response": "Groups of people",
+                    "score": 0,
+                    "recommendations": [
+                        {"recommendation": "The data should be assessed to determine wehther privacy and security controls are needed to prevent unauthorized retrieval of personal information or unauthorized access to group information. See [Privacy and Security] for more details."}
+                    ]
+                },
+				{
+                    "response": "Other",
+                    "score": 0,
+                    "recommendations": []
+                }
+            ]
+        },
+		{
+            "id": "CON00100",
+            "question_short": "obj_proportionality_sensitivity_attributes",
+            "question_long": "If the classification of data sensitivitity is not Unclassified, list all sensitive attributes. For tabular data, list the sensitive columns. For non-tabular data, list the sensitive properties/contents of the data.",
+            "help": "",
+            "notes": "",
+            "mandatory": "no",
+            "max_responses": 1,
+            "type": "string",
+            "format": "textarea",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "",
+                    "score": 0,
+                    "recommendations": [
+                        {"recommendation": "All information listed here must be subject to appropriate privacy and security controls. See [Privacy and Security] for more details."}
+                    ]
+                }
+            ]
+        }
+    ],
+	"obj_proportionality_flexibility": [
+        {
+            "id": "CON00100",
+            "question_short": "__toggle_yes__obj_proportionality_flexibility_feasibility",
+            "question_long": "Can this modification be made while still satisfactorily achieving the goals of the Activity?",
+            "help": "",
+            "notes": "",
+            "mandatory": "yes",
+            "max_responses": 1,
+            "type": "string",
+            "format": "select",
+            "listItem": "yes",
+            "responses": [
+				{
+                    "response": "Yes",
+                    "score": 0,
+                    "recommendations": []
+                },
+                {
+                    "response": "No",
+                    "score": 0,
+                    "recommendations": []
+                }
+            ]
+        },
+		{
+            "id": "CON00100",
+            "question_short": "obj_proportionality_flexibility_feasibility",
+            "question_long": "",
+            "help": "",
+            "notes": "",
+            "mandatory": "yes",
+            "max_responses": 1,
+            "type": "object",
+            "format": "obj_proportionality_flexibility_modifications",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "",
+                    "score": 0,
+                    "recommendations": []
+                }
+            ]
+        }
+    ],
+	"obj_proportionality_flexibility_modifications": [
+		{
+            "id": "CON00100",
+            "question_short": "obj_proportionality_flexibility_desc",
+            "question_long": "Briefly describe concrete steps that can be taken to apply the modification in the context of the Activity.",
+            "help": "",
+            "notes": "",
+            "mandatory": "yes",
+            "max_responses": 1,
+            "type": "string",
+            "format": "textarea",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "",
+                    "score": 0,
+                    "recommendations": []
+                }
+            ]
+        },
+		{
+            "id": "CON00100",
+            "question_short": "obj_proportionality_flexibility_application",
+            "question_long": "Do you plan to apply this modification?",
+            "help": "",
+            "notes": "",
+            "mandatory": "yes",
+            "max_responses": 1,
+            "type": "string",
+            "format": "select",
+            "listItem": "yes",
+            "responses": [
+				{
+                    "response": "Yes",
+                    "score": 0,
+                    "recommendations": []
+                },
+                {
+                    "response": "No",
+                    "score": 0,
+                    "recommendations": []
+                }
+            ]
+        }
+    ]
+}

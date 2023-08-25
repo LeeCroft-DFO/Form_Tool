@@ -1,0 +1,1407 @@
+﻿{
+    "sec_top": [
+        {
+            "id": "PTB00400",
+            "question_short": "sec_general_project",
+			"question_title": "General Information - Project",
+            "question_long": "",
+            "help": "",
+            "notes": "",
+            "mandatory": "yes",
+            "max_responses": 99,
+            "type": "object",
+            "format": "sec_general_project",
+            "listItem": "yes"        
+        },
+		{
+            "id": "PTB00400",
+            "question_short": "sec_general_model",
+			"question_title": "General Information - Model",
+            "question_long": "",
+            "help": "",
+            "notes": "",
+            "mandatory": "yes",
+            "max_responses": 99,
+            "type": "object",
+            "format": "sec_general_model",
+            "listItem": "yes"        
+        },
+		{
+            "id": "PTB00400",
+            "question_short": "sec_privacy",
+			"question_title": "Privacy and Security",
+            "question_long": "",
+            "help": "",
+            "notes": "",
+            "mandatory": "yes",
+            "max_responses": 99,
+            "type": "object",
+            "format": "sec_privacy",
+            "listItem": "yes"        
+        },
+		{
+            "id": "PTB00400",
+            "question_short": "sec_transparency",
+			"question_title": "Transparency",
+            "question_long": "",
+            "help": "",
+            "notes": "",
+            "mandatory": "yes",
+            "max_responses": 99,
+            "type": "object",
+            "format": "sec_transparency",
+            "listItem": "yes"        
+        },
+		{
+            "id": "PTB00400",
+            "question_short": "sec_accountability",
+			"question_title": "Accountability",
+            "question_long": "",
+            "help": "",
+            "notes": "",
+            "mandatory": "yes",
+            "max_responses": 99,
+            "type": "object",
+            "format": "sec_accountability",
+            "listItem": "yes"        
+        },
+		{
+            "id": "PTB00400",
+            "question_short": "sec_methodology",
+			"question_title": "Methodology and Data Quality",
+            "question_long": "",
+            "help": "",
+            "notes": "",
+            "mandatory": "yes",
+            "max_responses": 99,
+            "type": "object",
+            "format": "sec_methodology",
+            "listItem": "yes"        
+        },
+		{
+            "id": "PTB00400",
+            "question_short": "sec_fairness",
+			"question_title": "Fairness",
+            "question_long": "",
+            "help": "",
+            "notes": "",
+            "mandatory": "yes",
+            "max_responses": 99,
+            "type": "object",
+            "format": "sec_fairness",
+            "listItem": "yes"        
+        },
+		{
+            "id": "PTB00400",
+            "question_short": "sec_explainability",
+			"question_title": "Explainability",
+            "question_long": "",
+            "help": "",
+            "notes": "",
+            "mandatory": "yes",
+            "max_responses": 99,
+            "type": "object",
+            "format": "sec_explainability",
+            "listItem": "yes"        
+        },
+		{
+            "id": "PTB00400",
+            "question_short": "sec_sovereignty",
+			"question_title": "Indigenous Data Sovereignty",
+            "question_long": "",
+            "help": "",
+            "notes": "",
+            "mandatory": "yes",
+            "max_responses": 99,
+            "type": "object",
+            "format": "sec_sovereignty",
+            "listItem": "yes"        
+        }
+    ],
+	"sec_general_project": [
+        {
+            "id": "ATB00100",
+            "question_short": "general_project_name",
+            "question_long": "What is the name of the project?",
+            "help": "",
+            "notes": "",
+            "mandatory": "yes",
+            "max_responses": 1,
+            "type": "string",
+            "format": "text",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "",
+                    "score": 0,
+                    "recommendations": []
+                }
+            ]
+        },
+		{
+            "id": "ATB00100",
+            "question_short": "general_project_team",
+            "question_long": "What team or division is leading the project development?",
+            "help": "",
+            "notes": "",
+            "mandatory": "yes",
+            "max_responses": 1,
+            "type": "string",
+            "format": "text",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "",
+                    "score": 0,
+                    "recommendations": []
+                }
+            ]
+        },
+		{
+            "id": "ATB00100",
+            "question_short": "general_project_contact",
+            "question_long": "Who is the responsible AI correspondent for the project (i.e., who is filling out this form)?",
+            "help": "",
+            "notes": "",
+            "mandatory": "yes",
+            "max_responses": 1,
+            "type": "string",
+            "format": "text",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "",
+                    "score": 0,
+                    "recommendations": []
+                }
+            ]
+        },
+		{
+            "id": "ATB00100",
+            "question_short": "general_project_prod_date",
+            "question_long": "When is the project expected to go into production?",
+            "help": "",
+            "notes": "",
+            "mandatory": "yes",
+            "max_responses": 1,
+            "type": "string",
+            "format": "text",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "",
+                    "score": 0,
+                    "recommendations": []
+                }
+            ]
+        }
+    ],
+	"sec_general_model": [
+        {
+            "id": "ATB00100",
+            "question_short": "general_model_purpose",
+            "question_long": "What purpose does the model serve in the project (i.e., what process or system is the model supporting)?",
+            "help": "",
+            "notes": "",
+            "mandatory": "yes",
+            "max_responses": 1,
+            "type": "string",
+            "format": "textarea",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "",
+                    "score": 0,
+                    "recommendations": []
+                }
+            ]
+        },
+		{
+            "id": "ATB00100",
+            "question_short": "general_model_paradigm",
+            "question_long": "Which training paradigm is used for the model?",
+            "help": "",
+            "notes": "",
+            "mandatory": "yes",
+            "max_responses": 1,
+            "type": "string",
+            "format": "select",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "Supervised",
+                    "score": 0,
+                    "recommendations": []
+                },
+                {
+                    "response": "Unsupervised",
+                    "score": 0,
+                    "recommendations": []
+                },
+                {
+                    "response": "Semi-supervised",
+                    "score": 0,
+                    "recommendations": []
+                },
+				{
+                    "response": "Reinforcement Learning",
+                    "score": 0,
+                    "recommendations": []
+                },
+				{
+                    "response": "Other",
+                    "score": 0,
+                    "recommendations": []
+                }
+            ]
+        },
+		{
+            "id": "ATB00100",
+            "question_short": "general_model_paradigm_other",
+            "question_long": "If Other was selected as the response to the question above, please specify the paradigm.",
+            "help": "",
+            "notes": "",
+            "mandatory": "no",
+            "max_responses": 1,
+            "type": "string",
+            "format": "text",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "",
+                    "score": 0,
+                    "recommendations": []
+                }
+            ]
+        },
+		{
+            "id": "ATB00100",
+            "question_short": "general_model_task",
+            "question_long": "Which task is the model used for?",
+            "help": "",
+            "notes": "",
+            "mandatory": "yes",
+            "max_responses": 1,
+            "type": "string",
+            "format": "select",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "Classification",
+                    "score": 0,
+                    "recommendations": []
+                },
+                {
+                    "response": "Regression",
+                    "score": 0,
+                    "recommendations": []
+                },
+                {
+                    "response": "Clustering",
+                    "score": 0,
+                    "recommendations": []
+                },
+				{
+                    "response": "Anomaly Detection",
+                    "score": 0,
+                    "recommendations": []
+                },
+				{
+                    "response": "Object Detection",
+                    "score": 0,
+                    "recommendations": []
+                },
+				{
+                    "response": "Natural Language Processing",
+                    "score": 0,
+                    "recommendations": []
+                },
+				{
+                    "response": "Other",
+                    "score": 0,
+                    "recommendations": []
+                }
+            ]
+        },
+		{
+            "id": "ATB00100",
+            "question_short": "general_model_task_other",
+            "question_long": "If Other was selected as the response to the question above, please specify the task.",
+            "help": "",
+            "notes": "",
+            "mandatory": "no",
+            "max_responses": 1,
+            "type": "string",
+            "format": "text",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "",
+                    "score": 0,
+                    "recommendations": []
+                }
+            ]
+        },
+		{
+            "id": "ATB00100",
+            "question_short": "general_model_audience",
+            "question_long": "What audience is the intended userbase of the system supported by the model?",
+            "help": "",
+            "notes": "",
+            "mandatory": "yes",
+            "max_responses": 1,
+            "type": "string",
+            "format": "textarea",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "",
+                    "score": 0,
+                    "recommendations": []
+                }
+            ]
+        }
+    ],
+	"sec_privacy": [
+		{
+            "id": "ATB00100",
+            "question_short": "__toggle_yes__privacy_information",
+            "question_long": "Is the model trained using data that contains private information?",
+            "help": "",
+            "notes": "",
+			"has_follow_up": "yes",
+            "mandatory": "yes",
+            "max_responses": 1,
+            "type": "string",
+            "format": "select",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "Yes",
+                    "score": 0,
+                    "recommendations": []
+                },
+                {
+                    "response": "No",
+                    "score": 0,
+                    "recommendations": []
+                }
+            ]
+        },
+        {
+            "id": "ATB00100",
+            "question_short": "privacy_information",
+            "question_long": "Briefly describe what measures have been taken to protect the privacy of the training data.",
+            "help": "",
+            "notes": "",
+            "mandatory": "yes",
+            "max_responses": 1,
+            "type": "string",
+            "format": "textarea",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "",
+                    "score": 0,
+                    "recommendations": [
+                        {"recommendation": "If privacy is to be preserved through confidentiality, appropriate security measures must be put in place to ensure that any users who should not have access to the training data cannot access the model. Otherwise, the data must be protected through privacy-preserving technologies. For example, the model could be trained using a differentially private training approach."}
+                    ]
+                }
+            ]
+        },
+		{
+            "id": "ATB00100",
+            "question_short": "__toggle_yes__privacy_federated",
+            "question_long": "Is the model trained from crowd-sourced data or in a federated manner?",
+            "help": "",
+            "notes": "",
+			"has_follow_up": "yes",
+            "mandatory": "yes",
+            "max_responses": 1,
+            "type": "string",
+            "format": "select",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "Yes",
+                    "score": 0,
+                    "recommendations": []
+                },
+                {
+                    "response": "No",
+                    "score": 0,
+                    "recommendations": []
+                }
+            ]
+        },
+		{
+            "id": "ATB00100",
+            "question_short": "privacy_federated",
+            "question_long": "What measures have been taken to protect against malicious influence during model training?",
+            "help": "",
+            "notes": "",
+            "mandatory": "yes",
+            "max_responses": 1,
+            "type": "string",
+            "format": "textarea",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "",
+                    "score": 0,
+                    "recommendations": [
+                        {"recommendation": "Ensure that methods of protection have been put in place to protect the model during training."}
+                    ]
+                }
+            ]
+        }
+    ],
+	"sec_transparency": [
+        {
+            "id": "ATB00100",
+            "question_short": "transparency_usage",
+            "question_long": "What efforts have been made to convey information on when and how the model is being used?",
+            "help": "",
+            "notes": "",
+            "mandatory": "yes",
+            "max_responses": 1,
+            "type": "string",
+            "format": "textarea",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "",
+                    "score": 0,
+                    "recommendations": [
+                        {"recommendation": "Ensure that information is provided to indicate how and when AI is being used and to provide details about the model. The [transparency supporting process] can be followed to ensure standardized information is conveyed."}
+                    ]
+                }
+            ]
+        },
+		{
+            "id": "ATB00100",
+            "question_short": "__toggle_no__transparency_data",
+            "question_long": "Has the training data been published as open data in accordance with FAIR Principles?",
+            "help": "",
+            "notes": "",
+			"has_follow_up": "yes",
+            "mandatory": "yes",
+            "max_responses": 1,
+            "type": "string",
+            "format": "select",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "Yes",
+                    "score": 0,
+                    "recommendations": []
+                },
+                {
+                    "response": "No",
+                    "score": 0,
+                    "recommendations": []
+                }
+            ]
+        },
+		{
+            "id": "ATB00100",
+            "question_short": "transparency_data",
+            "question_long": "State why the training data has not been published as open data or why the FAIR Principles were not applied.",
+            "help": "",
+            "notes": "",
+            "mandatory": "yes",
+            "max_responses": 1,
+            "type": "string",
+            "format": "textarea",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "",
+                    "score": 0,
+                    "recommendations": [
+                        {"recommendation": "Whenever possible, it is recommended to publish training data as open data to ensure replicability of results and to promote continued work by other interested groups."},
+						{"recommendation": "When training data cannot be published as open data, it is still recommended to follow the [FAIR Principles] to ensure ease of access for the audiences intended to access the data. Open access is not a requirement of the FAIR Principles."}
+                    ]
+                }
+            ]
+        },
+		{
+            "id": "ATB00100",
+            "question_short": "transparency_code_versioning",
+            "question_long": "Is the source code stored in a version-controlled repository?",
+            "help": "",
+            "notes": "",
+            "mandatory": "yes",
+            "max_responses": 1,
+            "type": "string",
+            "format": "select",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "Yes",
+                    "score": 0,
+                    "recommendations": []
+                },
+                {
+                    "response": "No",
+                    "score": 0,
+                    "recommendations": [
+                        {"recommendation": "It is recommended to use a version-controlled repository whenever possible. This is particularly important for projects in which more than one person is developing or using the code."}
+                    ]
+                }
+            ]
+        },
+		{
+            "id": "ATB00100",
+            "question_short": "__toggle_no__transparency_code_publishing",
+            "question_long": "Has the source code been published in a public repository (i.e., is it open source)?",
+            "help": "",
+            "notes": "",
+			"has_follow_up": "yes",
+            "mandatory": "yes",
+            "max_responses": 1,
+            "type": "string",
+            "format": "select",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "Yes",
+                    "score": 0,
+                    "recommendations": []
+                },
+                {
+                    "response": "No",
+                    "score": 0,
+                    "recommendations": [
+                        {"recommendation": "Whenever possible, it is recommended to publish source code in a public repository to ensure replicability of results and to promote continued work by other interested groups."}
+                    ]
+                }
+            ]
+        },
+		{
+            "id": "ATB00100",
+            "question_short": "transparency_code_publishing",
+            "question_long": "State why the source code has not been published in a public repository.",
+            "help": "",
+            "notes": "",
+            "mandatory": "yes",
+            "max_responses": 1,
+            "type": "string",
+            "format": "textarea",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "",
+                    "score": 0,
+                    "recommendations": []
+                }
+            ]
+        },
+		{
+            "id": "ATB00100",
+            "question_short": "transparency_code_execution",
+            "question_long": "Has the source code been assembled into a format that can be easily executed (e.g., a machine learning pipeline for model training and inference)?",
+            "help": "",
+            "notes": "",
+            "mandatory": "yes",
+            "max_responses": 1,
+            "type": "string",
+            "format": "select",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "Yes",
+                    "score": 0,
+                    "recommendations": []
+                },
+                {
+                    "response": "No",
+                    "score": 0,
+                    "recommendations": [
+                        {"recommendation": "It is recommended to create an easy-to-execute pipeline for the code such as a single script that can be run to prepare data and train or execute the model. This greatly facilitates usage of the model by others who may be less familiar with the code or who may have less coding experience."}
+                    ]
+                }
+            ]
+        },
+		{
+            "id": "ATB00100",
+            "question_short": "transparency_doc_execution",
+            "question_long": "Is the source code accompanied by sufficient documentation to explain the execution steps?",
+            "help": "",
+            "notes": "",
+            "mandatory": "yes",
+            "max_responses": 1,
+            "type": "string",
+            "format": "select",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "Yes",
+                    "score": 0,
+                    "recommendations": []
+                },
+                {
+                    "response": "No",
+                    "score": 0,
+                    "recommendations": [
+                        {"recommendation": "It is recommended to provide documentation describing how to use the model. If the code has been assembled into an easy-to-execute format per the previous question, the documentation required can be fairly succinct. Otherwise, all necessary steps to prepare data, train the model, run inference, and perform any other critical tasks should be provided."}
+                    ]
+                }
+            ]
+        },
+		{
+            "id": "ATB00100",
+            "question_short": "transparency_doc_reproduction",
+            "question_long": "Has sufficient documentation (e.g., data sources, code dependencies, data processing pipeline, training configuration, evaluation results, etc.) been produced to allow for the model to be reasonably reproduced?",
+            "help": "",
+            "notes": "",
+            "mandatory": "yes",
+            "max_responses": 1,
+            "type": "string",
+            "format": "select",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "Yes",
+                    "score": 0,
+                    "recommendations": []
+                },
+                {
+                    "response": "No",
+                    "score": 0,
+                    "recommendations": [
+                        {"recommendation": "It is recommended to provide detailed documentation to ensure replicability of results and to promote continued work by other interested groups."}
+                    ]
+                }
+            ]
+        }
+    ],
+	"sec_accountability": [
+        {
+            "id": "ATB00100",
+            "question_short": "accountability_justification",
+            "question_long": "Briefly state the justification as to why AI should be used in the project instead of simpler alternatives (e.g., improved performance, improved response times, reduced costs, etc.).",
+            "help": "",
+            "notes": "",
+            "mandatory": "yes",
+            "max_responses": 1,
+            "type": "string",
+            "format": "textarea",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "",
+                    "score": 0,
+                    "recommendations": []
+                }
+            ]
+        },
+		{
+            "id": "ATB00100",
+            "question_short": "__toggle_yes__accountability_directive",
+            "question_long": "Is the model to be deployed in a production system used to make an administrative decision or a related assessment about a client (e.g., decisions relating to the approval of applications for fishing licenses)?",
+            "help": "",
+            "notes": "",
+			"has_follow_up": "yes",
+            "mandatory": "yes",
+            "max_responses": 1,
+            "type": "string",
+            "format": "select",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "Yes",
+                    "score": 0,
+                    "recommendations": []
+                },
+                {
+                    "response": "No",
+                    "score": 0,
+                    "recommendations": []
+                }
+            ]
+        },
+		{
+            "id": "ATB00100",
+            "question_short": "accountability_directive",
+            "question_long": "Has the Directive on Automated Decision-Making been followed?",
+            "help": "",
+            "notes": "",
+            "mandatory": "yes",
+            "max_responses": 1,
+            "type": "string",
+            "format": "select",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "Yes",
+                    "score": 0,
+                    "recommendations": []
+                },
+                {
+                    "response": "No",
+                    "score": 0,
+                    "recommendations": [
+                        {"recommendation": "A model used in a production system used to make an administrative decision or a related assessment about a client is required to follow the [TBS Directive on Automated Decision-Making]."}
+                    ]
+                }
+            ]
+        },
+		{
+            "id": "ATB00100",
+            "question_short": "accountability_oversight",
+            "question_long": "What degree of human oversight is there for the decisions/actions supported by the model (e.g., they must be approved by a human, they can be overridden by a human, etc.)? Briefly provide the reasoning as to why this level of oversight is appropriate.",
+            "help": "",
+            "notes": "",
+            "mandatory": "yes",
+            "max_responses": 1,
+            "type": "string",
+            "format": "textarea",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "",
+                    "score": 0,
+                    "recommendations": [
+                        {"recommendation": "Ensure that any models used to support decision-making in critical areas include a human in-the-loop to verify decisions and override them if necessary."}
+                    ]
+                }
+            ]
+        },
+		{
+            "id": "ATB00100",
+            "question_short": "accountability_roles",
+            "question_long": "Have roles been defined to identify who is accountable for the actions automated by the model? Note that this context refers to executive-level accountability for the decisions to design and operationalize the model.",
+            "help": "",
+            "notes": "",
+            "mandatory": "yes",
+            "max_responses": 1,
+            "type": "string",
+            "format": "select",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "Yes",
+                    "score": 0,
+                    "recommendations": []
+                },
+                {
+                    "response": "No",
+                    "score": 0,
+                    "recommendations": [
+                        {"recommendation": "Ensure that accountability roles have been defined. A model or algorithm cannot be considered to be accountable for itself."}
+                    ]
+                }
+            ]
+        },
+		{
+            "id": "ATB00100",
+            "question_short": "__toggle_yes__accountability_audit",
+            "question_long": "Has an audit trail been kept for major decisions around the use of the model?",
+            "help": "",
+            "notes": "",
+			"has_follow_up": "yes",
+            "mandatory": "yes",
+            "max_responses": 1,
+            "type": "string",
+            "format": "select",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "Yes",
+                    "score": 0,
+                    "recommendations": []
+                },
+                {
+                    "response": "No",
+                    "score": 0,
+                    "recommendations": [
+                        {"recommendation": "It is recommended to keep an audit trail to ensure there is a record of the decision-making that led up to the creation and deployment of the model."}
+                    ]
+                }
+            ]
+        },
+		{
+            "id": "ATB00100",
+            "question_short": "accountability_audit",
+            "question_long": "What types of information have been recorded in the audit trail?",
+            "help": "",
+            "notes": "",
+            "mandatory": "yes",
+            "max_responses": 1,
+            "type": "string",
+            "format": "textarea",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "",
+                    "score": 0,
+                    "recommendations": []
+                }
+            ]
+        },
+		{
+            "id": "ATB00100",
+            "question_short": "__toggle_yes__accountability_feedback",
+            "question_long": "Is there a mechanism to allow for users or parties impacted by the model to provide feedback on model performance or impacts?",
+            "help": "",
+            "notes": "",
+			"has_follow_up": "yes",
+            "mandatory": "yes",
+            "max_responses": 1,
+            "type": "string",
+            "format": "select",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "Yes",
+                    "score": 0,
+                    "recommendations": []
+                },
+                {
+                    "response": "No",
+                    "score": 0,
+                    "recommendations": [
+                        {"recommendation": "It is recommended that some manner of feedback mechanism be put in place. Minimally, this could be a contact email address made visibile to users or parties impacted by the model such that they can get in touch to provide ad hoc feedback."}
+                    ]
+                }
+            ]
+        },
+		{
+            "id": "ATB00100",
+            "question_short": "accountability_feedback",
+            "question_long": "Briefly describe the nature of the feedback mechanism.",
+            "help": "",
+            "notes": "",
+            "mandatory": "yes",
+            "max_responses": 1,
+            "type": "string",
+            "format": "textarea",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "",
+                    "score": 0,
+                    "recommendations": []
+                }
+            ]
+        },
+		{
+            "id": "ATB00100",
+            "question_short": "accountability_review",
+            "question_long": "If the model is used to automate or support decision-making, is there a mechanism to allow for model decisions to be reviewed and challenged? If so, briefly describe the nature of the mechanism. If not, describe why this is not applicable.",
+            "help": "",
+            "notes": "",
+            "mandatory": "yes",
+            "max_responses": 1,
+            "type": "string",
+            "format": "textarea",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "",
+                    "score": 0,
+                    "recommendations": []
+                }
+            ]
+        }
+    ],
+	"sec_methodology": [
+        {
+            "id": "ATB00100",
+            "question_short": "methodology_training",
+            "question_long": "Is the training data of sufficient quantity and quality to support effective training of the model? Briefly describe how the data was assessed.",
+            "help": "",
+            "notes": "",
+            "mandatory": "yes",
+            "max_responses": 1,
+            "type": "string",
+            "format": "textarea",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "",
+                    "score": 0,
+                    "recommendations": []
+                }
+            ]
+        },
+		{
+            "id": "ATB00100",
+            "question_short": "methodology_assessment",
+            "question_long": "State the performance metrics and testing methodology used during assessment of the model. Briefly explain why this is appropriate for the model.",
+            "help": "",
+            "notes": "",
+            "mandatory": "yes",
+            "max_responses": 1,
+            "type": "string",
+            "format": "textarea",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "",
+                    "score": 0,
+                    "recommendations": []
+                }
+            ]
+        },
+		{
+            "id": "ATB00100",
+            "question_short": "methodology_testing",
+            "question_long": "Has adequate data been set aside from all training and model configuration activities to be used as a testing dataset? State the quantity of testing data in terms of number of records and percentage of (or ratio to) training data.",
+            "help": "",
+            "notes": "",
+            "mandatory": "yes",
+            "max_responses": 1,
+            "type": "string",
+            "format": "textarea",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "",
+                    "score": 0,
+                    "recommendations": []
+                }
+            ]
+        },
+		{
+            "id": "ATB00100",
+            "question_short": "methodology_disaggregate",
+            "question_long": "Has the performance of the model been evaluated at a disaggregate level (e.g., within data classes or data subsets as opposed to exclusively at the global level)?",
+            "help": "",
+            "notes": "",
+			"has_follow_up": "yes",
+            "mandatory": "yes",
+            "max_responses": 1,
+            "type": "string",
+            "format": "select",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "Yes",
+                    "score": 0,
+                    "recommendations": []
+                },
+                {
+                    "response": "No",
+                    "score": 0,
+                    "recommendations": [
+                        {"recommendation": "As model performance may vary greatly across different subsets of data, it is recommended to perform disaggregate analysis to better understand the strengths and weaknesses of the model."}
+                    ]
+                }
+            ]
+        },
+		{
+            "id": "ATB00100",
+            "question_short": "methodology_disaggregate_details",
+            "question_long": "If the model has been evaluated at a disaggregate level, briefly describe the nature of this evaluation. If not, state the reasoning why.",
+            "help": "",
+            "notes": "",
+            "mandatory": "yes",
+            "max_responses": 1,
+            "type": "string",
+            "format": "textarea",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "",
+                    "score": 0,
+                    "recommendations": []
+                }
+            ]
+        },
+		{
+            "id": "ATB00100",
+            "question_short": "methodology_performance",
+            "question_long": "Do the model results observed from testing satisfy the required level of performance from the model? Briefly describe why or why not.",
+            "help": "",
+            "notes": "",
+            "mandatory": "yes",
+            "max_responses": 1,
+            "type": "string",
+            "format": "textarea",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "",
+                    "score": 0,
+                    "recommendations": []
+                }
+            ]
+        },
+		{
+            "id": "ATB00100",
+            "question_short": "methodology_monitoring",
+            "question_long": "Briefly state how the model will be monitored and maintained in production to protect against degradation of performance.",
+            "help": "",
+            "notes": "",
+            "mandatory": "yes",
+            "max_responses": 1,
+            "type": "string",
+            "format": "textarea",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "",
+                    "score": 0,
+                    "recommendations": [
+                        {"recommendation": "Ensure that the model is minimally monitored for drift in performance, which may be caused by phenomena such as a change over time in the distribution of data presented to the model."}
+                    ]
+                }
+            ]
+        }
+    ],
+	"sec_fairness": [
+		{
+            "id": "ATB00100",
+            "question_short": "__toggle_yes__fairness_data",
+            "question_long": "Has the training data been inspected for potential sources of bias?",
+            "help": "",
+            "notes": "",
+			"has_follow_up": "yes",
+            "mandatory": "yes",
+            "max_responses": 1,
+            "type": "string",
+            "format": "select",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "Yes",
+                    "score": 0,
+                    "recommendations": []
+                },
+                {
+                    "response": "No",
+                    "score": 0,
+                    "recommendations": [
+                        {"recommendation": "The data should be inspected to check for bias that may impact the behaviour of the model, potentially leading to unfair outcomes. Refer to the [Bias in Data] guidance material."}
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "ATB00100",
+            "question_short": "fairness_data",
+            "question_long": "Briefly describe how the data was inspected for bias.",
+            "help": "",
+            "notes": "",
+            "mandatory": "yes",
+            "max_responses": 1,
+            "type": "string",
+            "format": "textarea",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "",
+                    "score": 0,
+                    "recommendations": []
+                }
+            ]
+        },
+		{
+            "id": "ATB00100",
+            "question_short": "fairness_model",
+            "question_long": "Have tools for the detection and mitigation of unfair model behaviour been applied?",
+            "help": "",
+            "notes": "",
+			"has_follow_up": "yes",
+            "mandatory": "yes",
+            "max_responses": 1,
+            "type": "string",
+            "format": "select",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "Yes",
+                    "score": 0,
+                    "recommendations": []
+                },
+                {
+                    "response": "No",
+                    "score": 0,
+                    "recommendations": []
+                }
+            ]
+        },
+		{
+            "id": "ATB00100",
+            "question_short": "fairness_model_details",
+            "question_long": "Briefly explain what steps have been taken to assess and mitigate unfair model behaviour. If no tools or processes to this end exist for the type of model used, explain why the model cannot or needs not be assessed.",
+            "help": "",
+            "notes": "",
+            "mandatory": "yes",
+            "max_responses": 1,
+            "type": "string",
+            "format": "textarea",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "",
+                    "score": 0,
+                    "recommendations": []
+                }
+            ]
+        }
+    ],
+	"sec_explainability": [
+		{
+            "id": "ATB00100",
+            "question_short": "explainability_interpretability",
+            "question_long": "Is the model considered to be interpretable (i.e., its behaviour is easily understood from a human perspective)?",
+            "help": "",
+            "notes": "",
+			"has_follow_up": "yes",
+            "mandatory": "yes",
+            "max_responses": 1,
+            "type": "string",
+            "format": "select",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "Yes",
+                    "score": 0,
+                    "recommendations": []
+                },
+                {
+                    "response": "No",
+                    "score": 0,
+                    "recommendations": [
+                        {"recommendation": "Whenever possible, it is recommended to give preference to interpretable models over black-box models. Often performance of interpretable models can be highly competitive with that of more complex models."}
+                    ]
+                }
+            ]
+        },
+		{
+            "id": "ATB00100",
+            "question_short": "explainability_interpretability_details",
+            "question_long": "If the model is interpretable, briefly explain how it can be interpreted. If it is not, provide the justification for why a non-interpretable model was selected.",
+            "help": "",
+            "notes": "",
+            "mandatory": "yes",
+            "max_responses": 1,
+            "type": "string",
+            "format": "textarea",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "",
+                    "score": 0,
+                    "recommendations": []
+                }
+            ]
+        },
+		{
+            "id": "ATB00100",
+            "question_short": "__toggle_yes__explainability_algorithms",
+            "question_long": "Have explainability algorithms been applied to help characterize the behaviour of the model?",
+            "help": "",
+            "notes": "",
+			"has_follow_up": "yes",
+            "mandatory": "yes",
+            "max_responses": 1,
+            "type": "string",
+            "format": "select",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "Yes",
+                    "score": 0,
+                    "recommendations": []
+                },
+                {
+                    "response": "No",
+                    "score": 0,
+                    "recommendations": [
+                        {"recommendation": "If an interpretable model has not been employed, explainaibility algorithms should be applied if possible."}
+                    ]
+                }
+            ]
+        },
+		{
+            "id": "ATB00100",
+            "question_short": "explainability_algorithms",
+            "question_long": "Briefly state what explainability algorithms have been applied and how they help to understand the model.",
+            "help": "",
+            "notes": "",
+            "mandatory": "yes",
+            "max_responses": 1,
+            "type": "string",
+            "format": "textarea",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "",
+                    "score": 0,
+                    "recommendations": []
+                }
+            ]
+        },
+		{
+            "id": "ATB00100",
+            "question_short": "__toggle_yes__explainability_descriptions",
+            "question_long": "Have descriptions of the model and explainability results been documented and conveyed to users?",
+            "help": "",
+            "notes": "",
+			"has_follow_up": "yes",
+            "mandatory": "yes",
+            "max_responses": 1,
+            "type": "string",
+            "format": "select",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "Yes",
+                    "score": 0,
+                    "recommendations": []
+                },
+                {
+                    "response": "No",
+                    "score": 0,
+                    "recommendations": [
+                        {"recommendation": "To ensure that the value of interpretable models or explainability results can be fully leveraged, it is recommended to make the information on these results available to the users of the model."}
+                    ]
+                }
+            ]
+        },
+		{
+            "id": "ATB00100",
+            "question_short": "explainability_descriptions",
+            "question_long": "Briefly describe how the explainability results have been presented to users.",
+            "help": "",
+            "notes": "",
+            "mandatory": "yes",
+            "max_responses": 1,
+            "type": "string",
+            "format": "textarea",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "",
+                    "score": 0,
+                    "recommendations": []
+                }
+            ]
+        }
+    ],
+	"sec_sovereignty": [
+		{
+            "id": "ATB00100",
+            "question_short": "__toggle_yes__sovereignty_data",
+            "question_long": "Is the model trained using Indigenous data?",
+            "help": "",
+            "notes": "",
+			"has_follow_up": "yes",
+            "mandatory": "yes",
+            "max_responses": 1,
+            "type": "string",
+            "format": "select",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "Yes",
+                    "score": 0,
+                    "recommendations": []
+                },
+                {
+                    "response": "No",
+                    "score": 0,
+                    "recommendations": []
+                }
+            ]
+        },
+		{
+            "id": "ATB00100",
+            "question_short": "sovereignty_data",
+            "question_long": "For models trained with Indigenous data, steps must be taken to respect Indigenous data sovereignty in the context of model management.",
+            "help": "",
+            "notes": "",
+            "mandatory": "yes",
+            "max_responses": 1,
+            "type": "object",
+            "format": "obj_sovereignty",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "",
+                    "score": 0,
+                    "recommendations": []
+                }
+            ]
+        }
+    ],
+	"obj_sovereignty": [
+		{
+            "id": "ATB00100",
+            "question_short": "obj_sovereignty___toggle_yes__sovereignty_model_management",
+            "question_long": "Have consultations been held with the data owners to determine how to respect Indigenous data sovereignty throughout the management of the model?",
+            "help": "",
+            "notes": "",
+			"has_follow_up": "yes",
+            "mandatory": "yes",
+            "max_responses": 1,
+            "type": "string",
+            "format": "select",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "Yes",
+                    "score": 0,
+                    "recommendations": []
+                },
+                {
+                    "response": "No",
+                    "score": 0,
+                    "recommendations": [
+                        {"recommendation": "When Indigenous data is used to train a model, it is given a novel encoding in the model that is produced. To properly respect Indigenous data sovereignty, the owners of the data should be consulted on aspects related to the management of the model."}
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "ATB00100",
+            "question_short": "obj_sovereignty_sovereignty_model_management",
+            "question_long": "Briefly describe the nature of the consultations.",
+            "help": "",
+            "notes": "",
+            "mandatory": "yes",
+            "max_responses": 1,
+            "type": "string",
+            "format": "textarea",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "",
+                    "score": 0,
+                    "recommendations": []
+                }
+            ]
+        },
+		{
+            "id": "ATB00100",
+            "question_short": "obj_sovereignty_sovereignty_model_publishing",
+            "question_long": "If there is intent to share or publish the model, has permission been obtained from the data owners?",
+            "help": "",
+            "notes": "",
+			"has_follow_up": "yes",
+            "mandatory": "yes",
+            "max_responses": 1,
+            "type": "string",
+            "format": "select",
+            "listItem": "yes",
+            "responses": [
+                {
+                    "response": "Yes",
+                    "score": 0,
+                    "recommendations": []
+                },
+                {
+                    "response": "No",
+                    "score": 0,
+                    "recommendations": [
+                        {"recommendation": "When Indigenous data is used to train a model, it is given a novel encoding in the model that is produced. To properly respect Indigenous data sovereignty, the owners of the data must be consulted to obtain free, prior and informed consent to share or publish the model."}
+                    ]
+                }
+            ]
+        }
+    ]
+}

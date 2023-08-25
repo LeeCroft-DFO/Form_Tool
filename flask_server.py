@@ -3,8 +3,11 @@ import json
 import os
 import copy
    
+#specification of assessment type
+assessment_type = 'data_ethics' # 'data_ethics', 'responsible_ai'
+   
 #specification of the id for the section to use as the root of the tree structuring of sections
-top_level_section = 'lu_questions_data_project_tombstone'
+top_level_section = 'sec_top'
 
 #object to track the responses  
 responses = {'question_index': 0}
@@ -13,8 +16,13 @@ responses = {'question_index': 0}
 
 
 #load the questionnaire json data
-with open('data/CostingFramework_Min_Enh.json', 'rb') as json_file:
-    questions = json.load(json_file)
+if (assessment_type == 'data_ethics'):
+    with open('data/Data_Ethics.json', 'rb') as json_file:
+        questions = json.load(json_file)
+        
+elif (assessment_type == 'responsible_ai'):
+    with open('data/Responsible_AI.json', 'rb') as json_file:
+        questions = json.load(json_file)
     
   
 #expand the full object structure for a section of questions
@@ -22,15 +30,55 @@ def parse_questions(section_name):
 
     #for each question, if the question is a non-section object, expand it with a sub_questions attribute
     for question in questions[section_name]:
-        if ((question['type'] == 'object') and (not('lu_questions' in question['format']))):
+        if ((question['type'] == 'object') and (not('sec_' in question['format']))):
             question['sub_questions'] = parse_questions(question['format'])
 
     return questions[section_name]
     
     
+#look up the title and instructions for the given section
+def get_instructions(question_index):
+
+    section_title = 'Self-Assessment Questionnaire'
+    
+    if (assessment_type == 'data_ethics'):
+        section_instructions = 'The questions in the following sections should be answered in relation to a planned activity involving interactions with data (henceforth, the Activity). These interactions may include, but are not limited to, collection, usage (e.g., for operational decision-making, research, exploratory analysis, etc.) and dissemination of data. The Activity may vary in scope from small-scale interactions to large-scale projects and may involve interactions with multiple sources of data.'
+    
+    elif (assessment_type == 'responsible_ai'):
+        section_instructions = 'The questions in the following sections should be answered in relation to a project involving interactions with AI. These interactions may include, but are not limited to, training, usage and monitoring of an AI model.'
+    
+    for section in questions.values():
+        for question in section:
+            if (('sec_' in question['question_short']) and (question['question_short'] == question_index)):
+                section_title = question['question_title']
+                section_instructions = question['question_long']
+                
+                break
+            
+    return section_title, section_instructions
+    
+    
+#count the number of total sections and how many have been completed
+def count_sections(question_index):
+
+    sections_complete = 0
+    sections_total = 0
+
+    for section in questions[question_index]:
+        if (section['format'][:4] == 'sec_'):
+            sections_total += 1
+            
+            child_sections_complete, child_sections_total = count_sections(section['format'])
+
+            if ((child_sections_complete == child_sections_total) and ('%s~0' % section['format']) in responses.keys()):
+                sections_complete += 1
+          
+    return sections_complete, sections_total
+    
+    
 #iterate over all question sections and expand the full object structures
 for key in questions.keys():
-    if ('lu_questions' in key):
+    if ('sec_' in key):
         questions[key] = parse_questions(key)
     
     
@@ -96,43 +144,6 @@ def parse_responses(res_dict):
     return parsed_dict
 
 
-#build a table of contents data structure as a tree of sections that have been reach by the user so far
-def extract_toc(response_obj):
-
-    toc = {}
-    num_incomplete = 0
-    
-    #for each key pertaining to a section at the current level of responses
-    for key in response_obj.keys():
-        if (('lu_questions' in key) and not('_subsection_instance_name' in key)):
-        
-            sub_toc = {}
-            
-            #for each instance of the section that has been created
-            for ind in range(len(response_obj[key])):
-            #for ind in response_obj[key]:
-            
-                sub_key = '%s~%s' % (key, response_obj[key][ind])
-            
-                #if the instance has its own response data, recursively parse it
-                if (sub_key in responses):
-                    children, sub_num_incomplete = extract_toc(responses[sub_key])
-                    sub_toc[sub_key] = {'complete': True, 'children': children}
-                    num_incomplete += sub_num_incomplete
-                    
-                #otherwise, store the instance as a leaf node of the tree
-                else:
-                    sub_toc[sub_key] = {'complete': False, 'children': {}}
-                    num_incomplete += 1
-                    
-                sub_toc[sub_key]['name'] = response_obj['%s_subsection_instance_name' % key][ind]
-              
-            #store all the instances for the section
-            toc[key] = sub_toc
-            
-    return toc, num_incomplete
-
-
 
 
   
@@ -173,7 +184,7 @@ def costing():
         
         #if navigation to the table of contents is needed, redirect to the appropriate route
         if (toc_redirect):
-            return redirect(url_for('toc'))
+            return redirect(url_for('costing', action='goto', question_index='sec_top'))
             
         #otherwise, redirect to the requested subsection
         else:
@@ -221,21 +232,15 @@ def costing():
         else:
             question_index = responses['question_index']
                           
-        #render the template for the current question category
-        return render_template('costing.html', question_index=responses['question_index'], questions=questions[question_index], saved_responses=saved_responses)
+        #get the title and instructions for the requested section
+        section_title, section_instructions = get_instructions(question_index) 
         
-  
-#table of contents used for navigation through questionnaire sections
-@app.route("/toc")
-def toc():
-
-    if (top_level_section in responses):
-        toc, num_incomplete = extract_toc(responses[top_level_section])
-    else:
-       toc= {}
-       num_incomplete = 1
-       
-    return render_template('toc.html', top_level_name=top_level_section, toc=toc, num_incomplete=num_incomplete)
+        #count the number of total sections and how many have been completed
+        sections_complete, sections_total = count_sections(top_level_section)
+                         
+        #render the template for the current question category
+        return render_template('costing.html', section_title=section_title, section_instructions=section_instructions, sections_complete=sections_complete, sections_total=sections_total, question_index=responses['question_index'], questions=questions[question_index], saved_responses=saved_responses)
+        
 
   
 #report of questions, responses and recommendations

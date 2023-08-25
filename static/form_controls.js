@@ -68,76 +68,70 @@ function add_instance(id) {
 			var inputs = new_obj.querySelectorAll(input_selector);
 			
 			inputs.forEach(function(node){			
-				var prefix = node.parentNode.parentNode.id
+				var prefix = node.parentNode.parentNode.parentNode.id
 				var question_short = node.name.substring(node.name.lastIndexOf('~')+1);
 				node.name = `${prefix}~${question_short}`;
 			});
 		});
 		
+		// for each question fieldset, prefix its name with its parent id
+		var fieldsets = new_obj.querySelectorAll('fieldset');
+		fieldsets.forEach(function(node){	
+			if (node.name.includes('~')){
+				var prefix = node.parentNode.parentNode.id
+				var question_short = node.name.substring(node.name.lastIndexOf('~')+1);
+				node.name = `fieldset_${prefix}~${question_short}`;
+			}			
+		});
+
 		return false;
 	};
 }
 
 
-// click handler for the add section instance button, enclosed for parameterization
-function add_sec_instance(id, fieldset){
-	return function(){
-		
-		num_instances[id] += 1;
-		
-		// create a div container for the new instance and give it a unique ID
-		var div = document.createElement('div');
-		div.id = `${id}~${num_instances[id]}`;
-		
-		// create a hidden input element used to track information about the instance ID
-		var input_hidden = document.createElement('input');
-		input_hidden.type = 'hidden';
-		input_hidden.name = `~${id}`;
-		input_hidden.value = num_instances[id];
-		
-		// create a text input for the instance name
-		var input_name = document.createElement('input');
-		input_name.type = 'text';
-		input_name.name = `~${id}_subsection_instance_name`;
-		input_name.required = true;
-		
-		// create a help tooltip
-		var label_help = document.createElement('label');
-		label_help.className = 'question-help';
-		label_help.title = 'Please provide a short name.';
-		label_help.innerHTML = '?';
-		
-		// create an edit instance button and give it a click listener to update the value of a hidden input field to the ID of the instance to be edited (navigation to that page is then handled by the form submission in the default behaviour of the button)
-		var input_edit = document.createElement('input');
-		input_edit.type = 'submit';
-		input_edit.name = 'sec_btn_edit';
-		input_edit.value = 'Edit Instance';
-		input_edit.addEventListener('click', function(){
-			document.getElementById('hidden_edit_index').value = div.id;
-		});
-		
-		// create a delete button and give it a click listener to delete the div tag containing the instance
-		var input_del = document.createElement('input');
-		input_del.type = 'button';
-		input_del.name = 'sec_btn_del';
-		input_del.value = 'Delete Instance';
-		input_del.addEventListener('click', function(){
-			fieldset.removeChild(div);
-		});
-		
-		// add the created elements to the div container and add the div container to the DOM
-		div.appendChild(input_hidden);
-		div.appendChild(input_name);
-		div.appendChild(label_help);
-		div.appendChild(input_edit);
-		div.appendChild(input_del);
-		fieldset.appendChild(div);
-	};
+// THIS FUNCTIONALITY REQUIRES TESTING IF IT WILL LATER BE USED FOR TOGGLING WITHIN DYNAMICALLY ADDED OBJECT INSTANCES
+function add_toggle_action(node, toggle_type){
+	
+	// extract the name of the target element
+	var start = node.name.indexOf(toggle_type);
+	var end = start + toggle_type.length
+	var pre_toggle = node.name.substring(0, start);
+	var post_toggle = node.name.substring(end);
+	
+	// look up the target element
+	var fieldset = document.querySelector(`fieldset[name="fieldset_${pre_toggle}${post_toggle}"]`);
+	
+	// initially set the target element to be invisible
+	if ((toggle_type == '__toggle_yes__') && (node.value != 'Yes') || (toggle_type == '__toggle_no__') && (node.value != 'No')){
+		fieldset.classList.add('invisible');
+		fieldset.setAttribute('disabled', '');
+	}
+
+	// apply and remove a hidden class based on the selection value
+	node.addEventListener('change', function() {
+		if ((toggle_type == '__toggle_yes__') && (this.value == 'Yes') || (toggle_type == '__toggle_no__') && (this.value == 'No')){
+			fieldset.classList.remove('invisible');
+			fieldset.removeAttribute('disabled', '');
+		}else{
+			fieldset.classList.add('invisible');
+			fieldset.setAttribute('disabled', '');
+		}
+	});
 }
 
 
 // run when the page is first loaded
 window.onload = function pageInit() {
+	
+	required_instances = new Object();
+	
+	// look up all hidden tags containing object id prefixes (each represents one group of object instances)
+	var hidden_ids_mandatory = document.querySelectorAll('p[name="hidden_id_mandatory"]');
+	
+	// for each group of object instances
+	hidden_ids_mandatory.forEach(function(node){
+		required_instances[node.id] = 1;
+	});
 	
 	// look up all hidden tags containing object id prefixes (each represents one group of object instances)
 	var hidden_ids = document.querySelectorAll('p[name="hidden_id"]');
@@ -156,7 +150,8 @@ window.onload = function pageInit() {
 		
 		// create a click handler for the add instance button
 		var btn = document.getElementById(`${node.id}_btn_add`);
-		btn.addEventListener('click', add_instance(node.id));
+		if (btn !== null)
+			btn.addEventListener('click', add_instance(node.id));
 		
 		// loop through object instances for the current group
 		var obj = document.getElementById(`${node.id}~obj_${num_instances[node.id]+1}`);
@@ -173,7 +168,7 @@ window.onload = function pageInit() {
 		}
 		
 		// if there are no instances (no saved data has been loaded), create one blank instance
-		if (num_instances[node.id] == 0)
+		if ((num_instances[node.id] == 0) && required_instances.hasOwnProperty(node.id))
 			add_instance(node.id)();
 	});
 	
@@ -193,10 +188,6 @@ window.onload = function pageInit() {
 			num_instances[node.id] = Math.max(num_instances[node.id], Number(instance_node.value));
 		});
 		
-		// add a click listener to the button used to generate additional section instances within the current group
-		var btn = document.getElementById(`${node.id}_btn_add`);
-		btn.addEventListener('click', add_sec_instance(node.id, node.parentNode));
-		
 		// for each section instance, add a click listener to the button used to edit the instance
 		var sec_edit_btns = node.parentNode.querySelectorAll('input[name="sec_btn_edit"]');
 		sec_edit_btns.forEach(function(edit_btn){
@@ -215,6 +206,18 @@ window.onload = function pageInit() {
 				div.parentNode.removeChild(div);
 			});
 		});
+	});
+	
+	// look up all select elements
+	var select_nodes = document.querySelectorAll('select');
+	
+	// for each select element, apply a toggle action if needed
+	select_nodes.forEach(function(node){
+		if (node.name.includes('__toggle_yes__'))
+			add_toggle_action(node, '__toggle_yes__');
+		
+		if (node.name.includes('__toggle_no__'))
+			add_toggle_action(node, '__toggle_no__');
 	});
 }
 
